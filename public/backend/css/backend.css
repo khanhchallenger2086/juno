@@ -1,0 +1,72 @@
+.table-parent tbody > tr > td,
+.table-parent thead > tr > th {
+    border-bottom: 1px solid #ccc !important;
+}
+
+.table-sonn tbody tr:last-child td {
+    border-bottom: 0px solid transparent !important;
+}
+
+.variant {
+    display: none;
+}
+
+.popup {
+    position: fixed;
+    top: 204px;
+    left: calc(25%);
+    background-color: #d3e4d3;
+    z-index: 100;
+    padding: 50px 0px 20px 0px;
+    width: 50%;
+}
+
+.note-editable {
+    height: 300px;
+}
+
+.note-editor.note-airframe,
+.note-editor.note-frame {
+    border: 1px solid #ccc !important;
+    border-radius: 4px;
+}
+
+.category a {
+    font-size: 20px;
+    color: grey;
+}
+
+#input-color:focus,
+#input-color1:focus {
+    outline: none;
+}
+
+#input-color,
+#input-color1 {
+    border: none;
+    margin-top: 5px;
+}
+
+.box-input-inner > div,
+.box-input-inner1 > div {
+    padding: 2px 10px;
+    background-color: pink;
+    border-radius: 10px;
+    margin: 5px;
+    display: inline-block;
+}
+
+.close-span,
+.close-span1 {
+    cursor: pointer;
+}
+
+.custom-file-label::after {
+    content: "Chọn hình";
+}
+
+/* .box-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-top: 2px;
+} */
