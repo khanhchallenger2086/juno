@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Client\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,25 @@ Route::get('category/trash', 'Backend\CategoryController@trash')->name('category
 Route::get('category/{id}/delete', 'Backend\CategoryController@delete')->name('category.delete'); // xóa mềm
 Route::resource('category', 'Backend\CategoryController')->except('destroy', 'show');
 
+// order
+// info_customer
+Route::get('order/info_customer', 'Backend\OrderController@info_customer')->name('order.info_customer');
+Route::get('order/restore_trash', 'Backend\OrderController@restore_trash')->name('order.restore_trash');
+Route::get('order/{id}/destroy_trash', 'Backend\OrderController@destroy_trash')->name('order.destroy_trash'); // xóa cứng
+Route::get('order/trash', 'Backend\OrderController@trash')->name('order.trash');
+Route::get('order/{id}/delete', 'Backend\OrderController@delete')->name('order.delete'); // xóa mềm
+Route::resource('order', 'Backend\OrderController')->except('destroy', 'show', 'create', 'store', 'edit', 'update');
+
+// Setting
+Route::get('/setting', 'Backend\SettingController@setting');
+Route::post('/update/setting/{setting}', 'Backend\SettingController@update_setting');
+
 // variant
 Route::get('/add-variant', 'Backend\VariantController@add_variant');
 Route::get('/remove-variant', 'Backend\VariantController@remove_variant');
 Route::get('/update-variant', 'Backend\VariantController@update_variant');
 Route::get('/updated-variant', 'Backend\VariantController@updated_variant');
+
+// color product
+Route::get('color/{id}/destroy_color', 'Backend\ColorController@destroy_color')->name('color.destroy_color'); // xóa cứng
+Route::resource('color', 'Backend\ColorController')->except('destroy', 'show');

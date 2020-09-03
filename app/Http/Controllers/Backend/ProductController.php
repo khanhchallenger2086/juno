@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\Color;
 use App\Model\Product;
+use App\Model\Product_category;
 use App\Model\ProductVariant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -19,10 +22,21 @@ class ProductController extends Controller
 
     public function index()
     {
-        $ListProduct = $this->model->GetListProduct();
+        // $ListProduct = $this->model->GetListProduct();
+        $page = $_GET['page'] ?? 0;
+        $num = 10;
+        $ListProduct = $this->model->offset($page * $num)->limit($num)->where('deleted_at', null)->get();
+        $ListProduct = $this->model->GetListProduct($ListProduct);
 
+        $count = collect(DB::select('select count(*) count from products where deleted_at is null'))->map(function ($ar) {
+            return $ar->count;
+        })[0];
+
+        $count_pagination = ceil($count / $num);
         return view('Backend.Product.Products', [
-            'list' => $ListProduct
+            'list' => $ListProduct,
+            'page' => $page,
+            'count' => $count_pagination
         ]);
     }
 
@@ -33,9 +47,11 @@ class ProductController extends Controller
         //     'code' => 'khanh',
         //     'style' => 'thoi trang'
         // ]);
+        $color = Color::get();
         $category = Category::where('parent', 0)->get();
         return view('Backend.Product.FormProduct', [
             'category' => $category,
+            'color' => $color,
             'method' => 'post',
             'action' => route('product.store')
         ]);
@@ -75,15 +91,22 @@ class ProductController extends Controller
         $post = $request->all();
         $post['uri'] = str_replace(" ", "-", $request->name);
         $post['code'] = "DH" . date("His");
-        $post["id_category"] = implode(";", $request->id_category);
+        // $post["id_category"] = implode(";", $request->id_category);
         $post["image_main"] = $main_image . ";";
         $post["image_detail"] = $detail_image . ";";
         $post["updated_at"] = null;
         $post["created_at"] = date("Y-m-d H:i:s", strtotime('+7 hours'));
 
         $id = Product::create($post)->id;
-        $color = explode(";", $request->color);
+        $color = $request->color;
         $size = explode(";", $request->size);
+
+        foreach ($request->id_category as $value) {
+            Product_category::create([
+                'id_category' => $value,
+                'id_product' => $id,
+            ]);
+        }
 
         $ar = [];
         foreach ($color as $v_color) {
@@ -114,7 +137,10 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::where('id', $id)->first();
+        $product->list_category = array_column($product->ListCategory->toArray(), 'id_category');
+        // array_column($product->ListCategory->toArray(), 'id_category')
+
         $category = Category::where('parent', 0)->get();
         return view('Backend.Product.FormProduct', [
             'category' => $category,
@@ -132,14 +158,18 @@ class ProductController extends Controller
         if (isset($request->image_main)) {
             $image_main_old = explode(";", rtrim($product->image_main, ";"));
             foreach ($image_main_old as $value) {
-                unlink('backend/images/juno/' . $value);
+                if (file_exists('backend/images/juno/' . $value)) {
+                    unlink('backend/images/juno/' . $value);
+                }
             }
         }
 
         if (isset($request->image_detail)) {
             $image_detail_old = explode(";", rtrim($product->image_detail, ";"));
             foreach ($image_detail_old as $value) {
-                unlink('backend/images/juno/' . $value);
+                if (file_exists('backend/images/juno/' . $value)) {
+                    unlink('backend/images/juno/' . $value);
+                }
             }
         }
 
@@ -150,10 +180,21 @@ class ProductController extends Controller
         $product->style = $request->style ?? $product->style;
         $product->material = $request->material ?? $product->material;
         $product->uri = $request->uri ?? $product->uri;
-        $product->id_category = implode(";", $request->id_category) ?? $product->id_category;
         $product->updated_at = date("Y-m-d H:i:s", strtotime('+7 hours'));
 
         $product->save();
+
+
+        if (isset($request->id_category)) {
+            $category = Product_category::where('id_product', $id)->delete();
+            foreach ($request->id_category as $value) {
+                Product_category::create([
+                    'id_category' => $value,
+                    'id_product' => $id,
+                ]);
+            }
+        }
+
 
         return redirect()->route('product.index')->with(["msg" => "Sửa thành công"]);
     }
@@ -163,6 +204,19 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->deleted_at = date("Y-m-d H:i:s", strtotime('+7 hours'));
         $product->save();
+
+        $category = Product_category::where('id_product', $id)->get();
+        foreach ($category as $item) {
+            $item->deleted_at = date("Y-m-d H:i:s", strtotime('+7 hours'));
+            $item->save();
+        }
+
+        $variant = ProductVariant::where('id_product', $id)->get();
+        foreach ($variant as $item) {
+            $item->deleted_at = date("Y-m-d H:i:s", strtotime('+7 hours'));
+            $item->save();
+        }
+
         return redirect()->route('product.index')->with(["msg" => "Xóa thành công"]);
     }
 
@@ -184,6 +238,18 @@ class ProductController extends Controller
             $product = product::find($id);
             $product->deleted_at = null;
             $product->save();
+
+            $category = Product_category::where('id_product', $id)->get();
+            foreach ($category as $item) {
+                $item->deleted_at = null;
+                $item->save();
+            }
+
+            $variant = ProductVariant::where('id_product', $id)->get();
+            foreach ($variant as $item) {
+                $item->deleted_at = null;
+                $item->save();
+            }
         }
         return redirect()->back()->with(["msg" => "Phục Hồi Thành Công"]);
     }
@@ -191,6 +257,8 @@ class ProductController extends Controller
     public function destroy_trash($id)
     {
         product::find($id)->delete();
+        Product_category::where('id_product', $id)->delete();
+        ProductVariant::where('id_product', $id)->delete();
         $list = product::whereNotNull('deleted_at')->get();
         if (json_decode($list) != []) {
             return redirect()->back()->with(["msg" => "Xóa Thành Công"]);

@@ -52,6 +52,11 @@ $(document).ready(function () {
         $(".variant").css("display", "none");
     });
 
+    $("#info_customer").click(function () {
+        $(".popup").removeClass("d-none");
+        info_customer($(this));
+    });
+
     // input name color // lặp code viết lại hàm chung xài chung
     $i = 0;
     $value = "";
@@ -88,7 +93,17 @@ $(document).ready(function () {
     $k = 0;
     $value1 = "";
     $("#input-color1").change(function () {
-        if (!$(".box-input-inner1").text().includes($(this).val())) {
+        var ar = $(".box-input-inner1").text().split(";");
+        var result = true;
+
+        for ($i = 0; $i < ar.length; $i++) {
+            if ($(this).val() == ar[$i]) {
+                result = false;
+                break;
+            }
+        }
+
+        if (result == true) {
             $k++;
             $(".box-input-inner1").append(
                 "<div class=" + "span1" + $k + ">  </div>"
@@ -113,6 +128,7 @@ $(document).ready(function () {
         } else {
             $(this).val("");
         }
+        console.log($("#input-color-hidden1").val());
     });
 
     $("#submit").click(function () {
@@ -163,6 +179,30 @@ function remove_variant($obj) {
                         "d-none"
                     );
                 }
+            } else {
+                console.log("thất bại laravel");
+            }
+        })
+        .fail(function () {
+            console.log("thất bại vì ko có dữ liệu");
+        });
+}
+
+function info_customer($obj) {
+    $.ajax({
+        url: "/order/info_customer",
+        type: "get",
+        dataType: "json",
+        data: {
+            id: $obj.attr("data-id"),
+        },
+    })
+        .done((data) => {
+            if (data.update == 1) {
+                $("#name").val(data.customer.name);
+                $("#phone").val(data.customer.phone);
+                $("#email").val(data.customer.email);
+                $("#address").val(data.customer.address);
             } else {
                 console.log("thất bại laravel");
             }

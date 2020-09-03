@@ -36,7 +36,7 @@
                         </td>
                     </tr>
                     @endforeach
-                    @if ($list == [])
+                    @if (json_decode($list) == [])
                     <tr>
                         <td colspan="6" class="text-center">Không có danh mục nào</td>
                     </tr>

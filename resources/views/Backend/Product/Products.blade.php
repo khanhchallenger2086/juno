@@ -127,6 +127,23 @@
                 </tbody>
 
             </table>
+            {{-- $i đại diện cho page lun  --}}
+            @if ($count > 1)
+            <div class="text-right mr-5">
+                <ul class="pagination">
+                    @if ($page > 0)
+                    <li class="page-item"><a class="page-link" href="?page={{$page - 1}}">
+                            <</a> </li> @endif @for ($i=$page - 3; $i < $count; $i++) @if ($i> -1 && $i < $page + 4) <li class="page-item"><a
+                                        class="page-link @if ($page == $i) bg-success @endif" href="?page={{$i}}">{{$i}}</a></li>
+                    @endif
+                    @endfor
+
+                    @if ($page != $count - 1 )
+                    <li class="page-item"><a class="page-link" href="?page={{$page + 1}}">></a></li>
+                    @endif
+                </ul>
+            </div>
+            @endif
         </div>
     </div>
 </div>

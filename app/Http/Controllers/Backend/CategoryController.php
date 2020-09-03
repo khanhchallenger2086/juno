@@ -19,9 +19,11 @@ class CategoryController extends Controller
 
     public function create()
     {
+        $category_parent = Category::where('deleted_at', null)->where('parent', 0)->get();
         return view('Backend.Category.FormCategory', [
             'method' => 'post',
-            'action' => route('category.store')
+            'action' => route('category.store'),
+            'category_parent' => $category_parent
         ]);
     }
 
@@ -48,10 +50,12 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $product = Category::find($id);
+        $category_parent = Category::where('deleted_at', null)->where('parent', 0)->get();
         return view('Backend.Category.FormCategory', [
             'edit' => 'Sửa sản phẩm',
             'method' => 'put',
             'category' => $product,
+            'category_parent' => $category_parent,
             'action' => Route('category.update', $product->id)
         ]);
     }

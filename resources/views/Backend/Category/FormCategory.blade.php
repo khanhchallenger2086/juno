@@ -35,8 +35,12 @@
                     <p for="cname" class="control-label col-lg-3 font-weight-bold">Bí danh</p>
                     <div class="col-lg-6">
                         <select name="parent" class="form-control" id="">
-                            <option value="0" {{ isset($category) ? $category->parent == 0 ? "selected" : "" : "" }}>Danh mục cha</option>
-                            <option value="1" {{ isset($category) ? $category->parent == 1 ? "selected" : "" : "" }}>Danh mục con</option>
+                            <option value="0">Mặc định danh mục cha</option>
+                            @foreach ($category_parent as $item)
+                            <option value="{{$item->id}}" {{ isset($category) ? $item->id == $category->parent ? "selected" : "" : "" }}>
+                                {{$item->name}}
+                            </option>
+                            @endforeach
                         </select>
                         <p class="text-danger">@error('parent') {{ $errors->first('parent') }} @enderror</p>
                     </div>
