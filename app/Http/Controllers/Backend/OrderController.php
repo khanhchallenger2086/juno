@@ -20,7 +20,9 @@ class OrderController extends Controller
     {
         $ListOrder = $this->model->GetListOrder();
         return view('Backend.Order.Order', [
-            'list' => $ListOrder
+            'list' => $ListOrder,
+            'ActiveOrder' => 1,
+            'ActiveListOrder' => 1
         ]);
     }
 
@@ -51,7 +53,8 @@ class OrderController extends Controller
     {
         $list = Order::whereNotNull('deleted_at')->get();
         if (json_decode($list) != []) {
-            return view('Backend.Order.TrashOrder', ['list' => $list]);
+            return view('Backend.Order.TrashOrder', ['list' => $list,'ActiveOrder' => 1,
+            'ActiveTrashOrder' => 1]);
         } else {
             return redirect()->route('order.index')->with(["msg" => "Bạn chưa xóa đơn hàng nào"]);
         }

@@ -162,7 +162,7 @@ function remove_variant($obj) {
     // đang hiển thị thằng table-son nào
     var table_son = $("#name_table_son").attr("data-name");
     $.ajax({
-        url: "/remove-variant",
+        url: "/admin/remove-variant",
         type: "get",
         dataType: "json",
         data: {
@@ -190,7 +190,7 @@ function remove_variant($obj) {
 
 function info_customer($obj) {
     $.ajax({
-        url: "/order/info_customer",
+        url: "/admin/order/info_customer",
         type: "get",
         dataType: "json",
         data: {
@@ -215,7 +215,7 @@ function info_customer($obj) {
 function add_variant() {
     var table_son = $("#name_table_son").attr("data-name");
     $.ajax({
-        url: "/add-variant",
+        url: "/admin/add-variant",
         type: "get",
         dataType: "json",
         data: {
@@ -268,7 +268,7 @@ function add_variant() {
 
 function updated_variant($obj) {
     $.ajax({
-        url: "/updated-variant",
+        url: "/admin/updated-variant",
         type: "get",
         dataType: "json",
         data: {
@@ -323,7 +323,7 @@ function updated_variant($obj) {
 function update_variant($obj) {
     var table_son = $("#name_table_son").attr("data-name");
     $.ajax({
-        url: "/update-variant",
+        url: "/admin/update-variant",
         type: "get",
         dataType: "json",
         data: {

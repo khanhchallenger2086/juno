@@ -11,7 +11,7 @@ class ColorController extends Controller
     public function index()
     {
         $list = Color::get();
-        return view('Backend.Color.Color', ['list' => $list]);
+        return view('Backend.Color.Color', ['list' => $list , 'ActiveProduct' => 1, 'ActiveListColor' => 1]);
     }
 
     public function create()

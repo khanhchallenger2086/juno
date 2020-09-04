@@ -12,7 +12,9 @@ class CategoryController extends Controller
     {
         $ListCategory = Category::where('deleted_at', null)->get();
         return view('Backend.Category.Category', [
-            'list' => $ListCategory
+            'list' => $ListCategory,
+            'ActiveCategory' => 1,
+            'ActiveListCategory' => 1
         ]);
     }
 
@@ -23,7 +25,9 @@ class CategoryController extends Controller
         return view('Backend.Category.FormCategory', [
             'method' => 'post',
             'action' => route('category.store'),
-            'category_parent' => $category_parent
+            'category_parent' => $category_parent,
+            'ActiveCategory' => 1,
+            'ActiveCreateCategory' => 1
         ]);
     }
 
@@ -84,7 +88,8 @@ class CategoryController extends Controller
     {
         $list = Category::whereNotNull('deleted_at')->get();
         if (json_decode($list) != []) {
-            return view('Backend.Category.TrashCategory', ['list' => $list]);
+            return view('Backend.Category.TrashCategory', ['list' => $list ,'ActiveCategory' => 1,
+            'ActiveTrashCategory' => 1]);
         } else {
             return redirect()->route('category.index')->with(["msg" => "Bạn chưa xóa danh mục nào"]);
         }

@@ -11,7 +11,7 @@ class SettingController extends Controller
     function setting()
     {
         $setting = DB::table('setting')->where('setting', '1')->first();
-        return view('Backend.Setting.FormSetting', ['setting' => $setting]);
+        return view('Backend.Setting.FormSetting', ['setting' => $setting, 'ActiveSetting' => 1 ]);
     }
 
     function update_setting(Request $request, $setting)

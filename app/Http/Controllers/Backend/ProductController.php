@@ -36,7 +36,9 @@ class ProductController extends Controller
         return view('Backend.Product.Products', [
             'list' => $ListProduct,
             'page' => $page,
-            'count' => $count_pagination
+            'count' => $count_pagination,
+            'ActiveProduct' => 1,
+            'ActiveListProduct' => 1
         ]);
     }
 
@@ -53,7 +55,9 @@ class ProductController extends Controller
             'category' => $category,
             'color' => $color,
             'method' => 'post',
-            'action' => route('product.store')
+            'action' => route('product.store'),
+            'ActiveProduct' => 1,
+            'ActiveCreateProduct' => 1
         ]);
     }
 
@@ -226,7 +230,7 @@ class ProductController extends Controller
         $list = product::whereNotNull('deleted_at')->get();
         // var_dump(bool empty($list));
         if (json_decode($list) != []) {
-            return view('Backend.Product.TrashProduct', ['list' => $list]);
+            return view('Backend.Product.TrashProduct', ['list' => $list ,'ActiveProduct' => 1,'ActiveTrash' => 1]);
         } else {
             return redirect()->route('product.index')->with(["msg" => "Bạn chưa xóa sản phẩm nào"]);
         }
