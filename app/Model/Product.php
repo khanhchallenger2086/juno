@@ -25,6 +25,7 @@ class Product extends Model
         return $this->hasMany(Product_category::class, 'id_product', 'id')->where('deleted_at', null);
     }
 
+    
     // method Model
     // public function GetListProduct()
     // {

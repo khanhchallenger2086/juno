@@ -4,7 +4,7 @@
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="{{ isset($ActiveHome) ? 'active' : '' }}" href="/admin/home">
+                    <a class="{{ isset($ActiveHome) ? 'active' : '' }}" href="/admin">
                         <i class="fa fa-dashboard"></i>
                         <span>Trang chủ</span>
                     </a>

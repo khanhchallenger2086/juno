@@ -14,9 +14,12 @@ use Illuminate\Http\Client\Request;
 |
 */
 
+Route::get('/home', 'Frontend\HomeController@home');
+
+
 Route::prefix('admin')->group(function(){
     // Backend
-    Route::get('home', function () {
+    Route::get('/', function () {
         return view('backend.admin.home',['ActiveHome'=>1]);
     });
 
@@ -57,5 +60,6 @@ Route::prefix('admin')->group(function(){
     Route::get('color/{id}/destroy_color', 'Backend\ColorController@destroy_color')->name('color.destroy_color'); // xóa cứng
     Route::resource('color', 'Backend\ColorController')->except('destroy', 'show');
 });
+
 
 
