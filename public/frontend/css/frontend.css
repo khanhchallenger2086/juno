@@ -1,3 +1,16 @@
 .list-icon i {
     font-size: 35px;
 }
+
+/* #site-cart {
+    display: block!important;
+
+}
+
+.site-nav.style--sidebar {
+    left: 0px;
+} */
+
+.pagination {
+    float: right;
+}

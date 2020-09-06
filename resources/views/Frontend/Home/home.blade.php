@@ -37,7 +37,7 @@
                             <div class="product-resize col-xs-6 col-sm-3 pro-loop fixheight" style="height: 317px">
                                 <div class="product-block" data-anmation="1">
                                     <div class="product-img image-resize fixheight" style="height: 205px">
-                                        <a href="/products/gia-y-cao-go-t-slingback-khoa-trang-tri-luc-giac-j?color=xam" title="Mã sản phẩm: CG07093">
+                                    <a href="{{ Route('p.product-detail',$item_product->uri) }}" title="Mã sản phẩm: {{ $item_product->code }}">
                                             <picture>
                                                 <img class="img-loop lazyload"
                                                     src="/backend/images/juno/{{ explode(";",$item_product->image_main)[0] }}"

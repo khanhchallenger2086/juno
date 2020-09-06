@@ -15,6 +15,8 @@ use Illuminate\Http\Client\Request;
 */
 
 Route::get('/home', 'Frontend\HomeController@home');
+Route::get('/product', 'Frontend\ProductController@product');
+Route::get('/product-detail/{uri}', 'Frontend\ProductController@product_detail')->name('p.product-detail');
 
 
 Route::prefix('admin')->group(function(){

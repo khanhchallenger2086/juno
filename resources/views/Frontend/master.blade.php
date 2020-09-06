@@ -36,6 +36,7 @@
                     <!--header end-->
 
                     <!--main content start-->
+                    @include('frontend.widgets.cart')
                     @yield('content')
 
                     <!--footer start-->
