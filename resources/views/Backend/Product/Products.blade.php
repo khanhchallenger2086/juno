@@ -11,14 +11,20 @@
             {{-- đặt name và id khi nút xem được bấm  --}}
             <input class="form-control" type="hidden" id="id_product" data-id="">
             <input class="form-control" type="hidden" id="name_table_son" data-name="">
-
             <div class="form-group ">
                 <label for="cname" class="control-label col-lg-3">Màu sắc</label>
                 <div class="col-lg-6">
-                    <input class=" form-control" type="text" id="color" placeholder="Post a question?" value="" required>
+                    {{-- <input class=" form-control" type="text" id="color" placeholder="Post a question?" value="" required> --}}
+                    <select class="form-control" id="color">
+                        <option value="Chưa có màu">Chọn màu</option>
+                        @foreach ($color as $item_color)
+                        <option value="{{$item_color->name}}">{{$item_color->name}}</option>
+                        @endforeach
+                    </select>
+
                 </div>
             </div>
-            <div class="form-group ">
+            <div class="form-group">
                 <label for="cemail" class="control-label col-lg-3">Kích thước</label>
                 <div class="col-lg-6">
                     <input class="form-control" type="text" id="size" placeholder="Post a question?" value="" required>
@@ -63,7 +69,7 @@
                     <tr>
                         <td>{{ $item->code }}</td>
                         <td>{{ $item->name }}</td>
-                        <td><img width="50" height="50" src="/backend/images/juno/{{ substr($item->image_main, 0, strpos($item->image_main,";")) }}"
+                        <td><img width="50" height="50" src="/backend/images/juno/{{ substr($item->image_main, 0, strpos($item->image_main,";"))  }}"
                                 alt=""> </td>
                         <td>{{ $item->style }}</td>
                         <td>{{ $item->material }}</td>

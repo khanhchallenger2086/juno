@@ -52,10 +52,12 @@ class VariantController extends Controller
     public function updated_variant()
     {
         try {
-            DB::update('update product_variants set color = ?,size = ?,price = ?, price_market = ? where id_product = ?', [$_GET['color'], $_GET['size'], $_GET['price'], $_GET['price_market'], $_GET['id']]);
+            DB::update('update product_variants set color=?,size = ?,price = ?, price_market = ? where `id` = ?', [$_GET['color'], $_GET['size'], $_GET['price'], $_GET['price_market'], $_GET['id']]);
+            // $a =  DB::update('UPDATE `product_variants` SET `size` = 100 WHERE `id` = 93');
             return [
                 'update' => 1,
-                'variant' =>  $_GET
+                'variant' =>  $_GET,
+                'a' => $_GET['id']
             ];
         } catch (\Throwable $th) {
             return ['update' => 0];

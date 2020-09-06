@@ -28,15 +28,14 @@ class ProductController extends Controller
         $ListProduct = $this->model->offset($page * $num)->limit($num)->where('deleted_at', null)->get();
         $ListProduct = $this->model->GetListProduct($ListProduct);
 
-        $count = collect(DB::select('select count(*) count from products where deleted_at is null'))->map(function ($ar) {
-            return $ar->count;
-        })[0];
-
+        $count = array_column(DB::select('select count(*) count from products where deleted_at is null'), 'count')[0];
         $count_pagination = ceil($count / $num);
+        $color = Color::get();
         return view('Backend.Product.Products', [
             'list' => $ListProduct,
             'page' => $page,
             'count' => $count_pagination,
+            'color' => $color,
             'ActiveProduct' => 1,
             'ActiveListProduct' => 1
         ]);
@@ -230,7 +229,7 @@ class ProductController extends Controller
         $list = product::whereNotNull('deleted_at')->get();
         // var_dump(bool empty($list));
         if (json_decode($list) != []) {
-            return view('Backend.Product.TrashProduct', ['list' => $list ,'ActiveProduct' => 1,'ActiveTrash' => 1]);
+            return view('Backend.Product.TrashProduct', ['list' => $list, 'ActiveProduct' => 1, 'ActiveTrash' => 1]);
         } else {
             return redirect()->route('product.index')->with(["msg" => "Bạn chưa xóa sản phẩm nào"]);
         }

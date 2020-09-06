@@ -220,7 +220,7 @@ function add_variant() {
         dataType: "json",
         data: {
             id_product: $("#id_product").attr("data-id"),
-            color: $("#color").val(),
+            color: $("#color option:selected").text(),
             size: $("#size").val(),
             price: $("#price").val(),
             price_market: $("#price_market").val(),
@@ -267,13 +267,14 @@ function add_variant() {
 }
 
 function updated_variant($obj) {
+    // console.log($("#color option:selected").val());
     $.ajax({
         url: "/admin/updated-variant",
         type: "get",
         dataType: "json",
         data: {
             id: $obj.attr("data-id"),
-            color: $("#color").val(),
+            color: $("#color option:selected").val(),
             size: $("#size").val(),
             price: $("#price").val(),
             price_market: $("#price_market").val(),
@@ -282,6 +283,7 @@ function updated_variant($obj) {
         .done((data) => {
             if (data.update == 1) {
                 console.log("update thành công");
+                console.log(data.a);
                 $("#update").remove();
                 $("#add").remove();
                 // xóa popup khi update thành công
@@ -333,9 +335,13 @@ function update_variant($obj) {
         .done((data) => {
             if (data.update == 1) {
                 $(".popup").removeClass("d-none");
-                console.log(data.variant);
-                // reset lại form input
-                $("#color").val(data.variant.color);
+
+                $("#color option").each(function () {
+                    if ($(this).val() == data.variant.color) {
+                        $(this).attr("selected", "selected");
+                    }
+                });
+
                 $("#size").val(data.variant.size);
                 $("#price").val(data.variant.price);
                 $("#price_market").val(data.variant.price_market);
