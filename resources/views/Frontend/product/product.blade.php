@@ -1,19 +1,29 @@
 @extends('Frontend.master')
 
 @section('content')
-<ol class="breadcrumb breadcrumb-arrows clearfix">
+<div class="breadcrumb-shop">
+    <div class="padding-lf-40 clearfix">
+        <div class=" ">
+            <ol class="breadcrumb breadcrumb-arrows clearfix">
+                <li><a href="/home" target="_self"><i class="icofont-home"></i> Trang chủ</a></li>
+            <li><a href="{{ route('p.product','tat-ca-san-pham') }}" target="_self">Danh mục</a></li>
+            <li class="active"><span>{{ isset($name) ? "Tất cả " . $name : "Tất cả sản phẩm" }}</span></li>
+            </ol>
+        </div>
+    </div>		</div>
+{{-- <ol class="breadcrumb breadcrumb-arrows clearfix">
     <li><a href="/" target="_self"><i class="fa fa-home"></i> Trang chủ</a></li>
     <li><a href="/collections" target="_self">Danh mục</a></li>
     <li class="active"><span>Tất cả Giày</span></li>
-</ol>
+</ol> --}}
 <div class="padding-lf-40 clearfix">
 			<div id="collection-body" class="wrap-collection-body clearfix">
 				<div class="wrap-collection-title clearfix">
 					<div class="heading-collection clearfix">
 						<div class="col-md-8 col-sm-12 col-xs-12">
 							<h1 class="title">
-                        Tất cả Giày							</h1>
-							<div class="append-search visible-xs"><span class="x-size">Size: <b> 34</b><span class="append-search-remove"><span></span></span></span></div>
+                                {{ isset($name) ? "Tất cả "  . $name : "Tất cả sản phẩm" }}					</h1>
+							{{-- <div class="append-search visible-xs">  </div> --}}
 						</div>
 						<div class="col-md-4 col-sm-12 col-xs-12">
 							<div class="outerSort">
@@ -41,49 +51,143 @@
 							</div>
 						</div>
 					</div>
-				</div>
+                </div>
+            {{-- Bộ lọc --}}
+                <div class="filter-custom hidden-sm hidden-xs removeMobile">
+                    <span>BỘ LỌC</span>
+
+                    <div class="groupFilterNew">
+                        <div class="titleFilter clearfix">
+                            <div class="layered_subtitle dropdown-filter">
+                                <span>Màu sắc</span>
+                                <span class="icon-control">
+                                    <i class="fa fa-sort-down"></i>
+                                </span>
+                            </div>
+                            <div class="layered_subtitle dropdown-filter eachTagFilter" style="display: block;">
+                                <span>Kích cỡ</span>
+                                <span class="icon-control">
+                                    <i class="fa fa-sort-down"></i>
+                                </span>
+                            </div>
+                            <div class="layered_subtitle dropdown-filter eachTagFilter" style="display: block;">
+                                <span>Kiểu dáng</span>
+                                <span class="icon-control">
+                                    <i class="fa fa-sort-down"></i>
+                                </span>
+                            </div>
+                            <div class="layered_subtitle dropdown-filter eachTagFilter" style="display: block;">
+                                <span>Chất liệu</span>
+                                <span class="icon-control">
+                                    <i class="fa fa-sort-down"></i>
+                                </span>
+                            </div>
+                        </div>
+                    <input type="hidden" id="id_category" value="{{$id_category}}">
+                        <div class="contentFilter clearfix">
+                            <div class="filter-color s-filter">
+                                <ul id="filterColor"  class="color-2 check-box-list">
+                                    @foreach ($color as $item_color)
+                                    <li>
+                                    {{-- <input type="hidden" class="kind" value="color"> --}}
+                                    <input value="{{$item_color->name}}" class="filter" type="checkbox" id="color1{{$item_color->id}}" value="Đen" name="color-filter" >
+                                        <label title="{{$item_color->name}}" for="color1{{$item_color->id}}">
+                                            <span class="button"><img src="/backend/images/juno/{{$item_color->image}}" style="width:100%"></span>
+                                        </label>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="filter-size s-filter eachTagFilter" style="display: block;">
+                                <ul id="filterSize" class="check-box-list clearfix">
+                                    @foreach ($size as $item_size)
+                                    <li>
+                                    {{-- <input type="hidden" class="kind" value="size"> --}}
+                                    <input type="checkbox" class="filter" id="size{{$item_size}}" value="{{$item_size}}" >
+                                        <label for="size{{$item_size}}">
+                                            <span class="button"></span>
+                                            {{$item_size}}
+                                        </label>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="filter-style filter-height s-filter eachTagFilter" style="display: block;">
+                                <ul id="filterStyle" class="check-box-list clearfix">
+                                    @foreach ($style as $item_style)
+                                    <li>
+                                    {{-- <input type="hidden" class="kind" value="style"> --}}
+                                    <input type="checkbox" class="filter" id="style{{$item_style}}" value="{{$item_style}}" >
+                                        <label for="style{{$item_style}}">
+                                            <span class="button"></span>
+                                            {{$item_style}}
+                                        </label>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="filter-material s-filter eachTagFilter" style="display: block;">
+                                <ul id="filterMaterial" class="check-box-list clearfix">
+                                    @foreach ($material as $item_material)
+                                    <li>
+                                    {{-- <input type="hidden" class="kind" value="material"> --}}
+                                    <input type="checkbox" class="filter" id="material{{$item_material}}" value="{{$item_material}}">
+                                        <label for="material{{$item_material}}">
+                                            <span class="button"></span>
+                                            {{$item_material}}
+                                        </label>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="append-search"></div>
+                    <div class="append-url hide"><span class="url-color">?tag=do?hong</span></div>
+                </div>
+
 				<div class="clearfix filter-here 177-50">
         <div class="content-product-list product-list filter clearfix">
             @foreach ($list as $item)
-            <div class="product-resize col-md-3 col-sm-3 col-xs-6 pro-loop animated zoomIn fixheight" style="height: 326px;">
+            <?php
+                $variant = DB::table('product_variants')->where('deleted_at',null)->where('id_product',$item->id)->get();
+                $variant = array_column($variant->toArray(),'color');
+                $variant = array_unique($variant);
+            ?>
+            <div class="product-resize col-md-3 col-sm-3 col-xs-6 pro-loop animated zoomIn fixheight">
                 <div class="product-block" data-anmation="4">
-                    <div class="product-img image-resize fixheight" style="height: 217px;">
-                        <a href="/products/giay-xang-dan-quai-ngang-ban-to-sd01057?color=do_do" title="Mã sản phẩm: SD01057">
+                    <div class="product-img image-resize fixheight">
+                    <a href="{{ route('p.product-detail',$item->uri) }}" >
                             <picture>
-                                <img class="img-loop lazyload" src="images/do-do_sd01057_1_grande.jpg" data-src="//product.hstatic.net/1000003969/product/do-do_sd01057_1_grande.jpg" alt=" Giày xăng đan quai ngang bản to SD01057 ">
+                            <img class="img-loop lazyload" src="/backend/images/juno/{{ explode(';',$item->image_main)[0] }}" >
                             </picture>
 
                             <picture>
-                                <img class="img-loop img-hover lazyload" src="images/do-do_sd01057_2_grande.jpg" data-src="//product.hstatic.net/1000003969/product/do-do_sd01057_2_grande.jpg" alt=" Giày xăng đan quai ngang bản to SD01057 ">
+                                <img class="img-loop img-hover lazyload" src="/backend/images/juno/{{ explode(';',$item->image_detail)[0] }}" >
                             </picture>
                         </a>
                     </div>
                     <div class="product-detail clearfix">
                         <div class="variantColor">
                             <ul>
+                            @foreach ($variant as $item_variant)
+                            <?php
+                                $image_variant = DB::table('colors')->where('deleted_at',null)->where('name',$item_variant)->first()->image;
+                            ?>
+                                <li class="active" >
+                                    <a href="" >
+                                    <img class="lazyload" src="/backend/images/juno/{{$image_variant}}" >
+                                    </a>
+                                </li>
+                                @endforeach
 
-                <li class="active" data-filter="do_do" data-color="?color=do_do">
-                    <a href="/products/giay-xang-dan-quai-ngang-ban-to-sd01057?color=do_do" data-img="https://product.hstatic.net/1000003969/product/do-do_sd01057_3.jpg" data-img-hover="https://product.hstatic.net/1000003969/product/do-do_sd01057_1.jpg">
-                        <img class="lazyload" src="images/color_do_do_sd01057_f899e61f66b2410899deeda0c9b89015_small.jpg" data-src="//product.hstatic.net/1000003969/product/color_do_do_sd01057_f899e61f66b2410899deeda0c9b89015_small.jpg" alt="Đỏ đô">
-                    </a>
-                </li>
-
-                <li class data-filter="xanh_xam" data-color="?color=xanh_xam">
-                    <a href="/products/giay-xang-dan-quai-ngang-ban-to-sd01057?color=do_do" data-img="https://product.hstatic.net/1000003969/product/xanh-xam_sd01057_3.jpg" data-img-hover="https://product.hstatic.net/1000003969/product/xanh-xam_sd01057_1.jpg">
-                        <img class="lazyload" src="images/color_xanh_xam_sd01057_0bf61ab77c3b485e95d2da5130645de7_small.jpg" data-src="//product.hstatic.net/1000003969/product/color_xanh_xam_sd01057_0bf61ab77c3b485e95d2da5130645de7_small.jpg" alt="Xanh xám">
-                    </a>
-                </li>
-
-                <li class data-filter="den" data-color="?color=den">
-                    <a href="/products/giay-xang-dan-quai-ngang-ban-to-sd01057?color=do_do" data-img="https://product.hstatic.net/1000003969/product/den_sd01057_3.jpg" data-img-hover="https://product.hstatic.net/1000003969/product/den_sd01057_1.jpg">
-                        <img class="lazyload" src="images/color_den_sd01057_eb92681bf7054f038159d3875a570118_small.jpg" data-src="//product.hstatic.net/1000003969/product/color_den_sd01057_eb92681bf7054f038159d3875a570118_small.jpg" alt="Đen">
-                    </a>
-                </li>
                             </ul>
                         </div>
                         <div class="box-pro-detail">
                             <h3 class="pro-name">
-                                <a href="/products/giay-xang-dan-quai-ngang-ban-to-sd01057?color=do_do" title="Giày xăng đan quai ngang bản to SD01057">
+                                <a href="{{ route('p.product-detail',$item->uri) }}" title="Giày xăng đan quai ngang bản to SD01057">
                                     Giày xăng đan quai ngang bản to SD01057
                                 </a>
                             </h3>
@@ -109,7 +213,15 @@
             </div>
             @endforeach
         </div>
-                            {{ $list->links() }}
+                            {{-- {{ $list->links() }} --}}
+
+        <?php
+
+        ?>
+        <div class="text-center">
+            <a class="btn btn-primary more" data-page=""  >Xem thêm</a>
+        </div>
+    <input type="hidden" value="{{$amount}}" id="amount" >
 					<div class="btnLoadMore" style="display: none;">
 						<img src="images/down-arrow.png" alt="Down Arrow"><br>
 						<a href="javascript:void(0);">Xem thêm, còn nhiều sản phẩm đẹp lắm!</a>

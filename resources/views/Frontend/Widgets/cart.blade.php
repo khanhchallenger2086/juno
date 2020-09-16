@@ -1,53 +1,85 @@
 <div id="site-nav--mobile" class="site-nav style--sidebar">
     <div id="site-cart" class="site-nav-container" tabindex="-1">
-      <div class="site-nav-container-last">
-        <p class="title">Giỏ hàng</p>
-        <span class="textCartSide">Bạn đang có <b>0</b> sản phẩm trong giỏ hàng.</span>
-        <div class="cart-view clearfix">
-          <table id="clone-item-cart" class="table-clone-cart">
-            <tbody>
-              <tr class="item_2 hidden">
-                <td class="img">
-                  <a href title><img src alt /></a>
-                  <span class="hidden labelGiftInCart">HÀNG TẶNG</span>
-                </td>
-                <td>
-                  <a class="pro-title-view" href title></a>
-                  <span class="pro-price-view"></span>
-                  <del class="pro-price-del-view"></del>
-                  <span class="variant"></span>
-                  <span class="pro-quantity-view"></span>
-                  <span class="remove_link remove-cart removePro"> </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table id="cart-view">
-            <tbody>
-              <tr>
-                <td>Hiện chưa có sản phẩm</td>
-              </tr>
-            </tbody>
-          </table>
-          <span class="line"></span>
-          <table class="table-total">
-            <tbody>
-              <tr>
-                <td class="text-left"><b>TỔNG TIỀN TẠM TÍNH:</b></td>
-                <td class="text-right" id="total-view-cart">0₫</td>
-              </tr>
-              <tr>
-                <td colspan="2"><a href="/checkout" class="checkLimitCart linktocheckout button dark">Tiến hành đặt hàng</a></td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <a href="/cart" class="linktocart button dark">Xem chi tiết giỏ hàng <i class="fa fa-arrow-right"></i></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="site-nav-container-last">
+            <p class="title">Giỏ hàng</p>
+            <span class="textCartSide">Bạn đang có <b><span
+                        class="count">{{ session()->has('cart') ? count(session()->get('cart')) : "0" }}</span></b> sản phẩm
+                trong giỏ hàng.</span>
+            <div class="cart-view clearfix">
+                <table id="clone-item-cart" class="table-clone-cart">
+                    <tbody>
+                        <tr class="item_2 hidden">
+                            <td class="img">
+                                <a href title><img src alt /></a>
+                                <span class="hidden labelGiftInCart">HÀNG TẶNG</span>
+                            </td>
+                            <td>
+                                <a class="pro-title-view" href title></a>
+                                <span class="pro-price-view"></span>
+                                <del class="pro-price-del-view"></del>
+                                <span class="variant"></span>
+                                <span class="pro-quantity-view"></span>
+                                <span class="remove_link remove-cart removePro"> </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table id="cart-view">
+                    <tbody class="has-cart">
+                        @if (session()->get('cart') != [])
+                        <?php
+                            $total_price = 0;
+                        ?>
+                        @foreach (session()->get('cart') as $item_cart)
+                        <?php
+                            $total_price += (int) $item_cart->variant['price'] * $item_cart->buy;
+                        ?>
+                        <tr class="item_2" data-id="{{$item_cart->id}}">
+                            <td >
+                                <a href="{{route('p.product-detail',$item_cart->uri)}}" title="{{$item_cart->name}}"><img
+                                        src="/backend/images/juno/{{explode(";",$item_cart->image_main)[0]}}"
+                                        alt="{{$item_cart->name}}"></a>
+                            </td>
+                            <td>
+                                <a class="pro-title-view" href="/products/giay-mules-mui-vuong" title="/products/giay-mules-mui-vuong">Giày mules mũi
+                                    vuông</a>
+                                <span class="pro-price-view">{{number_format($item_cart->variant['price']) . "₫"}}</span>
+                                <del class="pro-price-del-view"></del>
+                                <span class="variant">{{$item_cart->variant['size']}} / {{$item_cart->variant['color']}}</span>
+                                <span class="delete_cart" data-id="{{$item_cart->variant['id']}}">Xóa</span>
+                            </td>
+                        </tr>
+
+                        @endforeach
+                        @else
+                        <tr class="no-product">
+                            <td>Hiện chưa có sản phẩm nào</td>
+                        </tr>
+                        @endif
+                    </tbody>
+
+                </table>
+                <span class=" line"></span>
+                <table class="table-total">
+                    <tbody>
+                        <tr>
+                            <td class="text-left"><b>TỔNG TIỀN TẠM TÍNH:</b></td>
+                            <td class="text-right" id="total-view-cart">{{ isset($total_price)  ? number_format($total_price) . "₫" : '0₫'}} </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><a href="/payment" class="checkLimitCart linktocheckout button dark">Tiến hành đặt
+                                    hàng</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <a href="/cart" class="linktocart button dark">Xem chi tiết giỏ hàng <i style="font-size:16px"
+                                        class="icofont-shopping-cart"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-      </div>
     </div>
     <!-- <div id="site-search" class="site-nav-container" tabindex="-1">
             <div class="site-nav-container-last">
@@ -94,6 +126,6 @@
             </div>
           </div> -->
     <button id="site-close-handle" class="site-close-handle" aria-label="Đóng" title="Đóng">
-      <img src="images/iconclose_32c1d6a3da3545278283605bbfca0b0b.png" alt="Đóng" />
+        <i style="font-size: 20px" class="icofont-ui-close"></i>
     </button>
-  </div>
+</div>

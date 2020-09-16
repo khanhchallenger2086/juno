@@ -12,4 +12,9 @@ class ProductVariant extends Model
     // {
     //     return $this->belongsTo(Product::class, 'id_product', 'id');
     // }
+
+    public function ListCategory()
+    {
+        return $this->hasMany(Product_category::class, 'id_product', 'id_product')->where('deleted_at', null);
+    }
 }

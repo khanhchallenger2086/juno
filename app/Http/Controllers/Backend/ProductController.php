@@ -48,15 +48,22 @@ class ProductController extends Controller
         //     'code' => 'khanh',
         //     'style' => 'thoi trang'
         // ]);
+        $style = Product::whereNotNull('style')->groupBy('style')->pluck('style')->all();
+        $material = Product::whereNotNull('material')->groupBy('material')->pluck('material')->all();
+        $size = ProductVariant::whereNotNull('size')->groupBy('size')->pluck('size')->all();
+        // $style = Product::distinct()->get('name')->all();
         $color = Color::get();
-        $category = Category::where('parent', 0)->get();
+        $category = Category::where('parent', 0)->where('deleted_at',null)->get();
         return view('Backend.Product.FormProduct', [
             'category' => $category,
             'color' => $color,
             'method' => 'post',
             'action' => route('product.store'),
             'ActiveProduct' => 1,
-            'ActiveCreateProduct' => 1
+            'ActiveCreateProduct' => 1,
+            'style' => $style ?? [],
+            'material' => $material ?? [],
+            'size' => $size ?? [],
         ]);
     }
 
@@ -118,6 +125,7 @@ class ProductController extends Controller
                     if ($v_size != "") {
                         $ar[] = [
                             'color' => $v_color,
+                            'image' => DB::table('colors')->where('name',$v_color)->first()->image,
                             'size' => $v_size
                         ];
                     }
@@ -129,6 +137,7 @@ class ProductController extends Controller
             ProductVariant::insert([
                 'color' => $item['color'],
                 'size' => $item['size'],
+                'image' => $item['image'],
                 "id_product" => $id,
                 "created_at" => date("Y-m-d H:i:s")
             ]);
@@ -142,14 +151,18 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)->first();
         $product->list_category = array_column($product->ListCategory->toArray(), 'id_category');
+        $style = Product::whereNotNull('style')->groupBy('style')->pluck('style')->all();
+        $material = Product::whereNotNull('material')->groupBy('material')->pluck('material')->all();
         // array_column($product->ListCategory->toArray(), 'id_category')
 
-        $category = Category::where('parent', 0)->get();
+        $category = Category::where('parent', 0)->where('deleted_at',null)->get();
         return view('Backend.Product.FormProduct', [
             'category' => $category,
             'edit' => 'Sửa sản phẩm',
             'product' => $product,
             'method' => 'put',
+            'style' => $style ?? [],
+            'material' => $material ?? [],
             'action' => Route('product.update', $product->id)
         ]);
     }

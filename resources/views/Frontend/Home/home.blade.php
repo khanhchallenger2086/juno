@@ -1,5 +1,6 @@
 @extends('Frontend.master')
 
+
 @section('content')
 <!-- phần lặp sản phẩm -->
 <section id="sectionHomeTabCollection1" class="clearfix section section-collection">
@@ -15,13 +16,13 @@
             <div class="sectionTitleTab clearfix">
                 {{-- danh mục --}}
                 <h2>
-                    <a href="/{{$item_parent->uri}}"> {{$item_parent->name}} </a>
+                <a href="{{ Route('p.product',$item_parent->uri) }}"> {{$item_parent->name}} </a>
                 </h2>
                 <div class="outerTabTitle">
                     <ul class="tabTitle">
                         @foreach ($category_son as $item_son)
                         <li data-slide="tab1_slide1">
-                            <a data-toggle="tab" href="/{{ $item_son->uri }}" data-handle="giay-moi-nhat"> {{$item_son->name}} </a>
+                            <a data-toggle="tab" href="{{ Route('p.product',$item_son->uri) }}" > {{$item_son->name}} </a>
                         </li>
                         @endforeach
                     </ul>
@@ -34,10 +35,11 @@
                     <div id="tabcollection-A1" class="clearfix tab-pane in active" data-get="true" data-slide="tab1_slide1">
                         <div class="product-lists-home">
                             @foreach ($all[$item_parent->id] as $item_product)
-                            <div class="product-resize col-xs-6 col-sm-3 pro-loop fixheight" style="height: 317px">
+                            <div class="product-resize col-xs-6 col-sm-3 pro-loop fixheight">
                                 <div class="product-block" data-anmation="1">
-                                    <div class="product-img image-resize fixheight" style="height: 205px">
-                                    <a href="{{ Route('p.product-detail',$item_product->uri) }}" title="Mã sản phẩm: {{ $item_product->code }}">
+                                    <div class="product-img image-resize fixheight" >
+                                        <a href="{{ Route('p.product-detail',$item_product->uri ?? "ko co uri") }}"
+                                            title="Mã sản phẩm: {{ $item_product->code }}">
                                             <picture>
                                                 <img class="img-loop lazyload"
                                                     src="/backend/images/juno/{{ explode(";",$item_product->image_main)[0] }}"
@@ -72,16 +74,16 @@
                                         </div>
                                         <div class="box-pro-detail">
                                             <h3 class="pro-name">
-                                                <a href="/products/gia-y-cao-go-t-slingback-khoa-trang-tri-luc-giac-j?color=xam"
+                                                <a href="{{ Route('p.product-detail',$item_product->uri ?? "ko co uri") }}"
                                                     title="Giày cao gót slingback khóa trang trí lục giác j">
                                                     {{$item_product->name}}
                                                 </a>
                                             </h3>
                                             <div class="box-pro-prices">
                                                 <p class="pro-price highlight">
-                                                    {{ $item_product->one_variant != [] ? $item_product->one_variant[0]->price . '₫' : '0₫' }}
+                                                    {{ $item_product->one_variant != [] ? number_format($item_product->one_variant[0]->price) . '₫' : '0₫' }}
                                                     <span
-                                                        style="color:red;text-decoration: line-through;">{{ $item_product->one_variant != [] ? $item_product->one_variant[0]->price_market . '₫' : '0₫' }}</span>
+                                                        style="color:red;text-decoration: line-through;">{{ $item_product->one_variant != [] && $item_product->one_variant[0]->price_market != 0 ? number_format($item_product->one_variant[0]->price_market) . '₫' : '' }}</span>
                                                 </p>
                                             </div>
                                         </div>

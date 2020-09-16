@@ -2,15 +2,141 @@
     font-size: 35px;
 }
 
-/* #site-cart {
-    display: block!important;
-
+#site-cart {
+    display: block !important;
 }
 
-.site-nav.style--sidebar {
+/* .site-nav.style--sidebar {
     left: 0px;
 } */
 
 .pagination {
     float: right;
 }
+
+.product-description {
+    cursor: pointer;
+}
+
+.pics {
+    margin-top: 0px !important;
+}
+
+.product-img {
+    height: 350px;
+}
+.product-img a {
+    height: 100%;
+}
+
+.full {
+    position: relative;
+    padding-top: 130%;
+    width: 100%;
+    height: 0px !important;
+}
+
+.full img {
+    position: absolute;
+    height: 100% !important;
+    top: 0px;
+    width: 100%;
+}
+
+.gallery {
+    margin: 0px !important;
+    width: 100% !important;
+}
+
+.pics {
+    width: auto !important;
+}
+/* .thumbs {
+    width: 100% !important;
+} */
+
+.full {
+    width: 100% !important;
+}
+
+.select-swap .color:nth-child(1) label,
+.select-swap .size:nth-child(1) label {
+    border: 1px solid;
+}
+
+.img-box {
+    position: relative;
+    padding-top: 100%;
+    height: 0px !important;
+    width: 100%;
+    display: block;
+}
+
+.img-box img {
+    position: absolute;
+    height: 100% !important;
+    top: 0px;
+    width: 100%;
+}
+
+.active_label {
+    transform: rotate(180deg);
+}
+
+.main-index {
+    transition: 0.5s;
+}
+
+.translateX {
+    transform: translateX(-480px);
+}
+
+.bg-body {
+    position: fixed;
+    background-color: black;
+    opacity: 0.2;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    display: none;
+    z-index: 1000;
+}
+
+#open_cart {
+    cursor: pointer;
+}
+
+.main-header.affix-mobile {
+    position: unset;
+}
+
+.delete_cart {
+    border: 1px solid #ccc;
+    width: auto;
+    padding: 5px;
+    cursor: pointer;
+    float: left;
+}
+
+#add-to-cart {
+    background-color: black;
+    display: block;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.item_2 td:nth-child(1) {
+    width:100px;
+}
+
+.d-none {
+    display: none;
+}
+
+.height {
+    height: 600px;
+    overflow: hidden;
+}
+

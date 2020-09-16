@@ -21,6 +21,8 @@ class VariantController extends Controller
     public function add_variant()
     {
         try {
+            // dd($_GET);
+            $_GET['image'] = DB::table('colors')->where('name',$_GET['color'])->first()->image;
             $id =  DB::table('product_variants')->insertGetId($_GET);
             return [
                 'update' => 1,
@@ -52,7 +54,13 @@ class VariantController extends Controller
     public function updated_variant()
     {
         try {
-            DB::update('update product_variants set color=?,size = ?,price = ?, price_market = ? where `id` = ?', [$_GET['color'], $_GET['size'], $_GET['price'], $_GET['price_market'], $_GET['id']]);
+            DB::update('update product_variants set image=?,color=?,size = ?,price = ?, price_market = ? where `id` = ?', [
+                DB::table('colors')->where('name',$_GET['color'])->first()->image
+                ,$_GET['color']
+                , $_GET['size']
+                , $_GET['price']
+                , $_GET['price_market'],
+                $_GET['id']]);
             // $a =  DB::update('UPDATE `product_variants` SET `size` = 100 WHERE `id` = 93');
             return [
                 'update' => 1,

@@ -12,6 +12,7 @@
         <div class="form">
             <form class="pt-4 pb-4 cmxform form-horizontal" method="post" action="{{$action}}" enctype="multipart/form-data">
                 {{-- Bị lặp code ở hàm xem lại và viết ra hàm chung --}}
+
                 @if (isset($edit))
                 <div class="form-group ">
                     <label for="cname" class="control-label col-lg-3">Mã sản phẩm</label>
@@ -33,66 +34,49 @@
                 </div>
 
                 @if (!isset($edit))
-                {{-- <div class="form-group ">
-                    <div class="p-0 col-lg-12">
-                        <div class="offset-lg-3 col-lg-6 ">
-                            <div class="box-input">
-                                <div class="box-input-inner "></div>
-                            </div>
+
+                    <div class="form-group">
+                        <label for="curl" class="control-label col-lg-3">Màu sắc</label>
+                        <div class="col-lg-6">
+                            <ul class="color-1" style="list-style-type:none;overflow-y: scroll;height:150px">
+                                @foreach ($color as $item)
+                                <li style="display: flex;align-item:center;">
+                                        <input type="checkbox" value="{{$item->name}}" id="checkbox{{$item->id}}-color" name="color[]">
+                                        <label style="flex:1" for="checkbox{{$item->id}}-color"> {{$item->name}}</label>
+                                </li>
+                                @endforeach
+                            </ul>
+                            <p class="text-danger">@error('color') {{ $errors->first('color') }} @enderror</p>
                         </div>
                     </div>
 
-                    <div class="col-lg-12 p-0">
-                        <p for="cname" style="font-weight: 700;" class="control-label col-lg-3">Màu</p>
-                        <div class="col-lg-6 ">
-                            <div style="border:1px solid #ccc;border-radius:5px">
-                                <input class="ml-2" style="width:100%" type="text" id="input-color" />
-                                <input type="hidden" value="" name="color" id="input-color-hidden">
+
+                    <div class="form-group ">
+                        <div class="p-0 col-lg-12">
+                            <div class="offset-lg-3 col-lg-6 ">
+                                <div class="box-input1">
+                                    <div class="box-input-inner1"></div>
+                                </div>
                             </div>
-                            <p class="text-danger">@error('color') {{ $errors->first('color') }} @enderror</p>
-        </div>
-    </div>
-</div> --}}
+                        </div>
 
-<div class="form-group category">
-    <label for="curl" class="control-label col-lg-3">Màu sắc</label>
-    <div class="col-lg-6">
-        <ul style="list-style-type:none;overflow-y: scroll;height:150px">
-            @foreach ($color as $item)
-            <li><a href="">
-                    <label for="checkbox{{$item->id}}-color">
-                        <input type="checkbox" value="{{$item->name}}" id="checkbox{{$item->id}}-color" name="color[]">
-                        {{$item->name}}
-                    </label>
-                </a>
-            </li>
-            @endforeach
-        </ul>
-        <p class="text-danger">@error('color') {{ $errors->first('color') }} @enderror</p>
-    </div>
-</div>
-
-
-<div class="form-group ">
-    <div class="p-0 col-lg-12">
-        <div class="offset-lg-3 col-lg-6 ">
-            <div class="box-input1">
-                <div class="box-input-inner1"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-12 p-0">
-        <p for="cname" style="font-weight: 700;" class="control-label col-lg-3">Kích thước</p>
-        <div class="col-lg-6 ">
-            <div style="border:1px solid #ccc;border-radius:5px">
-                <input class="ml-2" style="width:100%" type="text" id="input-color1" />
-                <input type="hidden" value="" name="size" id="input-color-hidden1">
-            </div>
-            <p class="text-danger">@error('size') {{ $errors->first('size') }} @enderror</p>
-        </div>
-    </div>
-</div>
+                        <div class="col-lg-12 p-0">
+                            <p for="cname" style="font-weight: 700;" class="control-label col-lg-3">Kích thước</p>
+                            <div class="col-lg-6 ">
+                                <div style="border:1px solid #ccc;border-radius:5px">
+                                    {{-- <input class="ml-2" style="width:100%" type="text" id="input-color1" /> --}}
+                                    <input type="hidden" value="" name="size" id="input-color-hidden1">
+                                    <input type="text" list="size" id="input-color1" multiple   style="width:100%" value="{{ isset($product) ? $product->material : "" }}" autocomplete="off"/>
+                                    <datalist id="size">
+                                        @foreach ($size as $item_size)
+                                            <option>{{$item_size}}</option>
+                                        @endforeach
+                                    </datalist>
+                                </div>
+                                <p class="text-danger">@error('size') {{ $errors->first('size') }} @enderror</p>
+                            </div>
+                        </div>
+                    </div>
 @endif
 
 @if (isset($edit))
@@ -135,43 +119,73 @@
     </div>
 </div>
 
-<div class="form-group ">
+{{-- <div class="form-group ">
     <label for="curl" class="control-label col-lg-3">Kiểu dáng</label>
     <div class="col-lg-6">
         <input class="form-control" type="text" value="{{ isset($product) ? $product->style : "" }}" name="style" placeholder="Kiểu dáng">
         <p class="text-danger">@error('style') {{ $errors->first('style') }} @enderror</p>
     </div>
+</div> --}}
+
+<div class="form-group ">
+    <label for="curl" class="control-label col-lg-3">Kiểu dáng</label>
+    <div class="col-lg-6">
+        {{-- <input class="form-control" type="text" value="{{ isset($product) ? $product->style : "" }}" name="style" placeholder="Kiểu dáng"> --}}
+        <input type="text" list="style" class="form-control" name="style" value="{{ isset($product) ? $product->style : "" }}" autocomplete="off"/>
+        <datalist id="style">
+            @foreach ($style as $item_style)
+                <option>{{$item_style}}</option>
+            @endforeach
+        </datalist>
+        <p class="text-danger">@error('style') {{ $errors->first('style') }} @enderror</p>
+    </div>
 </div>
+
+
+<div class="form-group ">
+    <label for="curl" class="control-label col-lg-3">Chất liệu</label>
+    <div class="col-lg-6">
+        {{-- <input class="form-control" type="text" value="{{ isset($product) ? $product->style : "" }}" name="style" placeholder="Kiểu dáng"> --}}
+        <input type="text" list="material"   class="form-control" name="material"  value="{{ isset($product) ? $product->material : "" }}" autocomplete="off"/>
+        <datalist id="material">
+            @foreach ($material as $item_material)
+                <option>{{$item_material}}</option>
+            @endforeach
+        </datalist>
+        <p class="text-danger">@error('material') {{ $errors->first('material') }} @enderror</p>
+    </div>
+</div>
+
+{{--
 <div class="form-group ">
     <label for="curl" class="control-label col-lg-3">Chất liệu</label>
     <div class="col-lg-6">
         <input class="form-control" type="text" value="{{ isset($product) ? $product->material : "" }}" name="material" placeholder="Chất liệu">
         <p class="text-danger">@error('material') {{ $errors->first('material') }} @enderror</p>
     </div>
-</div>
+</div> --}}
 
 <div class="form-group category">
     <label for="curl" class="control-label col-lg-3">Danh mục</label>
     <div class="col-lg-6">
-        <ul style="list-style-type:none;overflow-y: scroll;height:150px">
+        <ul class="category" style="list-style-type:none;overflow-y: scroll;height:150px">
             @foreach ($category as $item)
             <?php $category_son = DB::table('categories')->where('parent',$item->id)->get() ?>
             <li>
-                <label for="checkbox{{$item->id}}-category">
-                    <input type="checkbox" value="{{$item->id}}" @if (isset($product)) @if (in_array((string) $item->id,
+                <div>
+                    <i  class="fa fa-angle-right next-more" aria-hidden="true"></i>
+                <input type="checkbox" value="{{$item->id}}" @if (isset($product)) @if (in_array((string) $item->id,
                     $product->list_category)) checked @endif @endif id="checkbox{{$item->id}}-category" name="id_category[]">
-                    {{$item->name}}
-                </label>
+                    <label for="checkbox{{$item->id}}-category">{{$item->name}}</label>
+                </div>
                 @if (isset($category_son))
-                <ul style="list-style-type:none" class="ml-4">
+                <ul style="list-style-type:none" class="d-none">
                     @foreach ($category_son as $item_son)
                     <li>
-                        <label for="checkbox{{$item_son->id}}-category">
-                            <input type="checkbox" value="{{$item_son->id}}" @if (isset($product)) @if (in_array((string) $item_son->id,
+                        <input type="checkbox" value="{{$item_son->id}}" @if (isset($product)) @if (in_array((string) $item_son->id,
                             $product->list_category)) checked @endif @endif id="checkbox{{$item_son->id}}-category"
                             name="id_category[]">
-                            {{$item_son->name}}
-                        </label>
+                            <label for="checkbox{{$item_son->id}}-category"> {{$item_son->name}}</label>
                     </li>
                     @endforeach
                 </ul>

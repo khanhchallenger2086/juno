@@ -138,6 +138,16 @@ $(document).ready(function () {
     $("#name_category").change(function () {
         $("#uri_category").val(xoa_dau($(this).val()).replace(" ", "-"));
     });
+
+
+    $('.category > li > div > label').click(function(){
+        $('.category  li  input').prop("checked", false);
+        $('.next-more').removeClass('transform-rotate');
+        $(this).siblings('.next-more').addClass('transform-rotate');
+        $('.category li ul').addClass('d-none');
+        $(this).parent('div').siblings('ul').removeClass('d-none');
+        // $(this).unbind(alert(123));
+    });
 });
 
 function xoa_dau(str) {
@@ -289,7 +299,7 @@ function updated_variant($obj) {
                 // xóa popup khi update thành công
                 $(".popup").addClass("d-none");
 
-                $("#color").val("");
+                // $("#color").val("");
                 $("#size").val("");
                 $("#price").val("");
                 $("#price_market").val("");
@@ -338,6 +348,8 @@ function update_variant($obj) {
 
                 $("#color option").each(function () {
                     if ($(this).val() == data.variant.color) {
+                        console.log($(this).val());
+                        console.log(data.variant.color);
                         $(this).attr("selected", "selected");
                     }
                 });
@@ -363,7 +375,7 @@ function off_box() {
     $("#update").remove();
     $("#add").remove();
     // reset lại form input
-    $("#color").val("");
+    // $("#color").val("");
     $("#size").val("");
     $("#price").val("");
     $("#price_market").val("");
@@ -384,3 +396,5 @@ function open_box() {
         add_variant();
     });
 }
+
+

@@ -13,16 +13,35 @@ use Illuminate\Http\Client\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/lang-{lang}', 'Frontend\LangController@lang');
+Route::get('/test', 'Frontend\LangController@test')->middleware('locale');
 Route::get('/home', 'Frontend\HomeController@home');
-Route::get('/product', 'Frontend\ProductController@product');
+
+Route::get('/filter', 'Frontend\AjaxController@filter');
+// Route::get('/list-product', 'Frontend\ProductController@product')->name('p.product');
+Route::get('/product/{uri}', 'Frontend\ProductController@product')->name('p.product');
 Route::get('/product-detail/{uri}', 'Frontend\ProductController@product_detail')->name('p.product-detail');
+// Route::get('/click_color', 'Frontend\ProductController@product_detail')->name('p.product-detail');
+
+// Ajax
+Route::post('/add-cart-ajax', 'Frontend\AjaxController@add_cart_ajax')->name('ajax.add-cart');
+Route::post('/delete-cart-ajax', 'Frontend\AjaxController@delete_cart_ajax'); // ko đặt name vì bên trong javascript ko dùng route() dc
+Route::post('/update-cart', 'Frontend\AjaxController@update_cart')->name('ajax.update-cart');
+// mới sửa lại xem lại
+
+// cart detail
+Route::get('/cart', 'Frontend\CartController@cart_detail')->name('c.cart-detail');
+
+// payment
+Route::get('/payment', 'Frontend\CartController@payment');
 
 
-Route::prefix('admin')->group(function(){
+
+
+Route::prefix('admin')->group(function () {
     // Backend
     Route::get('/', function () {
-        return view('backend.admin.home',['ActiveHome'=>1]);
+        return view('backend.admin.home', ['ActiveHome' => 1]);
     });
 
     // product
@@ -62,6 +81,3 @@ Route::prefix('admin')->group(function(){
     Route::get('color/{id}/destroy_color', 'Backend\ColorController@destroy_color')->name('color.destroy_color'); // xóa cứng
     Route::resource('color', 'Backend\ColorController')->except('destroy', 'show');
 });
-
-
-

@@ -49,7 +49,8 @@ class Product extends Model
         return $ar;
     }
 
-    public function ProductOfCat_8Item() {
+    public function ProductOfCat_8Item()
+    {
         $category_parent = Category::where('parent', 0)->where('deleted_at', null)->limit(3)->get();
 
         $all = []; // trả về 3 danh mục 8 sản phẩm , load 3 th ở category
@@ -68,5 +69,4 @@ class Product extends Model
 
         return $all;
     }
-
 }
