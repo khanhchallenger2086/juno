@@ -17,21 +17,30 @@ class ProductController extends Controller
     {
         $category_parent = (new Category)->CategoryParent();
         $all = (new product)->ProductOfCat_8Item();
-        if ($uri == 'tat-ca-san-pham') {
+        if ($uri == 'tat-ca-san-pham' || $uri == 'new-product') {
             $id = "";
             $list = Product::where('deleted_at',null)->offset(0)->limit(8)->get();
-            $name = 'sản phẩm';
+            $name = $uri == 'new-product' ? 'hàng mới về' : 'sản phẩm';
             $amount = DB::select('select count(*) page from `products` where deleted_at is null');
             $amount = array_column($amount, 'page')[0] / 8;
         } else {
-            $id = Category::where('deleted_at',null)->where('uri',$uri)->first()->id;
-            $name = Category::where('deleted_at',null)->where('uri',$uri)->first()->name;
-            $list = Product::with('ListCategory')->where('deleted_at',null)->whereHas('ListCategory',function($a) use($id) {
-                $a->where('id_category',$id);
-            })->offset(0)->limit(8)->get();
-            $amount = DB::select('select count(*) page from `products` p join `product_categories` c on p.id  = c.id_product  where  c.deleted_at is null and c.id_category = ?', [$id]);
-            $amount = array_column($amount, 'page')[0] / 8;
+            if ($uri == 'sale') {
+                $id = "";
+                $list = Product::where('deleted_at',null)->where('sale',1)->offset(0)->limit(8)->get();
+                $name = 'sản phẩm';
+                $amount = DB::select('select count(*) page from `products` where deleted_at is null');
+                $amount = array_column($amount, 'page')[0] / 8;
+            } else {
+                $id = Category::where('deleted_at',null)->where('uri',$uri)->first()->id;
+                $name = Category::where('deleted_at',null)->where('uri',$uri)->first()->name;
+                $list = Product::with('ListCategory')->where('deleted_at',null)->whereHas('ListCategory',function($a) use($id) {
+                    $a->where('id_category',$id);
+                })->offset(0)->limit(8)->get();
+                $amount = DB::select('select count(*) page from `products` p join `product_categories` c on p.id  = c.id_product  where  c.deleted_at is null and c.id_category = ?', [$id]);
+                $amount = array_column($amount, 'page')[0] / 8;
+            }
         }
+
 
         // $style = Product::whereNotNull('style')->groupBy('style')->pluck('style')->all();
         if ($id != "") {
@@ -62,7 +71,8 @@ class ProductController extends Controller
             'size' => $size ?? [],
             'color' => $color ?? [],
             'id_category' => $id,
-            'amount' => ceil($amount)
+            'amount' => ceil($amount),
+            'uri' => $uri
         ]);
     }
 

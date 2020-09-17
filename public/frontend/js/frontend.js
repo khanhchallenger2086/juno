@@ -102,10 +102,34 @@ $(document).ready(function () {
 
         filter($page,"more");
     });
+
+    $('#mc-embedded-subscribe').click(function(){
+        if (validateEmail($('#send-email').val())) {
+
+            var url = "/send-mail";
+            var data = {
+                email: $('#send-email').val()
+            };
+            $.post(url, data)
+                .done(function (data) {
+                    alert('thành công');
+                })
+                .fail(function (data) {
+                    console.log("thất bại");
+                });
+        } else {
+            $('.check-mail').removeClass('d-none');
+        }
+    });
 });
 
 window.onload = function (){
     $('.more').attr('data-page',0);
+}
+
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 }
 
 function filter($page,$more) {
@@ -134,7 +158,8 @@ function filter($page,$more) {
         id_category: $('#id_category').val(),
         page : $page,
         more: $more,
-        amount: amount
+        amount: amount,
+        sale : $('#sale').val()
     };
 
     $.get(url, data)

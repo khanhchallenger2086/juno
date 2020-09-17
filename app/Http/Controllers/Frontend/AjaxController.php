@@ -7,6 +7,7 @@ use App\Model\Product;
 use App\Model\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class AjaxController extends Controller
 {
@@ -120,6 +121,7 @@ class AjaxController extends Controller
         $style =  $Rq->style ?? [];
         $material =  $Rq->material ?? [];
         $id_category = $Rq->id_category;
+        $sale = $Rq->sale;
 
         $list = Product::with('ListVariant')->with('ListCategory');
 
@@ -149,6 +151,10 @@ class AjaxController extends Controller
             });
         }
 
+        if ($sale == "sale") {
+            $list->where('sale',1);
+        }
+
         $page = $Rq->page;
         $more = $Rq->more;
 
@@ -158,6 +164,7 @@ class AjaxController extends Controller
         } else {
             $list = $list->where('deleted_at',null)->offset($page)->limit(8)->get();
         }
+
         // var_dump($color);
         // var_dump($style);
         // var_dump($material);
@@ -172,5 +179,18 @@ class AjaxController extends Controller
             'page' => $Rq->page,
             'amount' => $Rq->amount
         ], 200);
+    }
+
+    public function send_mail(Request $Rq) {
+        $data = [
+            'email' => $Rq->email
+        ];
+        Mail::send('email', $data, function ($message) use($Rq) {
+            $message->sender('khanhchallenger2086@gmail.com', 'Lâm khánh');
+            // $message->from('funnyboy252@yahoo.com', 'Lâm khánh');
+            $message->to('khanhchallenger2086@gmail.com', 'lam khanh');
+            $message->subject('Đã có người ghé thăm trang web của bạn');
+        });
+
     }
 }

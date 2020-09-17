@@ -224,6 +224,7 @@ function info_customer($obj) {
 
 function add_variant() {
     var table_son = $("#name_table_son").attr("data-name");
+
     $.ajax({
         url: "/admin/add-variant",
         type: "get",
@@ -233,7 +234,7 @@ function add_variant() {
             color: $("#color option:selected").text(),
             size: $("#size").val(),
             price: $("#price").val(),
-            price_market: $("#price_market").val(),
+            price_market: $("#price_market").val() == "" ? 0 : $("#price_market").val(),
         },
     })
         .done((data) => {
@@ -241,7 +242,7 @@ function add_variant() {
                 // tắt no-data mặc định save thành công
                 $("#add").remove();
                 $("#update").remove();
-
+                console.log(data.price_market);
                 $(table_son.concat(" .no-data")).addClass("d-none");
                 $(table_son.concat(" tbody")).append(`<tr>
                         <td>${data.color}</td>
@@ -287,7 +288,7 @@ function updated_variant($obj) {
             color: $("#color option:selected").val(),
             size: $("#size").val(),
             price: $("#price").val(),
-            price_market: $("#price_market").val(),
+            price_market: $("#price_market").val() == "" ? 0 : $("#price_market").val(),
         },
     })
         .done((data) => {

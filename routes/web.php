@@ -13,21 +13,13 @@ use Illuminate\Http\Client\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/lang-{lang}', 'Frontend\LangController@lang');
-Route::get('/test', 'Frontend\LangController@test')->middleware('locale');
-Route::get('/home', 'Frontend\HomeController@home');
+// Route::get('/lang-{lang}', 'Frontend\LangController@lang');
+// Route::get('/test', 'Frontend\LangController@test')->middleware('locale');
 
+Route::get('/home', 'Frontend\HomeController@home');
 Route::get('/filter', 'Frontend\AjaxController@filter');
-// Route::get('/list-product', 'Frontend\ProductController@product')->name('p.product');
 Route::get('/product/{uri}', 'Frontend\ProductController@product')->name('p.product');
 Route::get('/product-detail/{uri}', 'Frontend\ProductController@product_detail')->name('p.product-detail');
-// Route::get('/click_color', 'Frontend\ProductController@product_detail')->name('p.product-detail');
-
-// Ajax
-Route::post('/add-cart-ajax', 'Frontend\AjaxController@add_cart_ajax')->name('ajax.add-cart');
-Route::post('/delete-cart-ajax', 'Frontend\AjaxController@delete_cart_ajax'); // ko đặt name vì bên trong javascript ko dùng route() dc
-Route::post('/update-cart', 'Frontend\AjaxController@update_cart')->name('ajax.update-cart');
-// mới sửa lại xem lại
 
 // cart detail
 Route::get('/cart', 'Frontend\CartController@cart_detail')->name('c.cart-detail');
@@ -35,15 +27,21 @@ Route::get('/cart', 'Frontend\CartController@cart_detail')->name('c.cart-detail'
 // payment
 Route::get('/payment', 'Frontend\CartController@payment');
 
-
+// Ajax
+Route::post('/add-cart-ajax', 'Frontend\AjaxController@add_cart_ajax')->name('ajax.add-cart');
+Route::post('/delete-cart-ajax', 'Frontend\AjaxController@delete_cart_ajax');
+Route::post('/update-cart', 'Frontend\AjaxController@update_cart')->name('ajax.update-cart');
+Route::post('/send-mail', 'Frontend\AjaxController@send_mail');
 
 
 Route::prefix('admin')->group(function () {
     // Backend
-    Route::get('/', function () {
-        return view('backend.admin.home', ['ActiveHome' => 1]);
-    });
+    Route::get('/','Backend\AdminController@home')->name('home');
 
+    // login
+    Route::get('/login', 'Backend\AdminController@login')->name('auth.signin');
+    Route::post('/post-login', 'Backend\AdminController@post_login')->name('auth.login');
+    Route::get('/logout', 'Backend\AdminController@logout')->name('auth.logout');
     // product
     Route::get('product/restore_trash', 'Backend\productController@restore_trash')->name('product.restore_trash');
     Route::get('product/{id}/destroy_trash', 'Backend\productController@destroy_trash')->name('product.destroy_trash'); // xóa cứng

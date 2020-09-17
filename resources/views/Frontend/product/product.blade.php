@@ -221,7 +221,8 @@
         <div class="text-center">
             <a class="btn btn-primary more" data-page=""  >Xem thêm</a>
         </div>
-    <input type="hidden" value="{{$amount}}" id="amount" >
+        <input type="hidden" value="{{$uri}}" id="sale" >
+        <input type="hidden" value="{{$amount}}" id="amount" >
 					<div class="btnLoadMore" style="display: none;">
 						<img src="images/down-arrow.png" alt="Down Arrow"><br>
 						<a href="javascript:void(0);">Xem thêm, còn nhiều sản phẩm đẹp lắm!</a>

@@ -33,7 +33,7 @@
         <div class="no-padding hidden-xs col-sm-12 col-md-2">
             <div class="header-mid wrap-flex-align">
                 <div class="wrap-logo" itemscope itemtype="http://schema.org/Organization">
-                    <a href="/" itemprop="url">
+                    <a href="/home" itemprop="url">
                         <img itemprop="logo" src="{{ asset('/frontend/images/logo.svg') }}" alt="JUNO" class="img-responsive logoimg" />
                     </a>
                 </div>
@@ -106,7 +106,7 @@
                     <nav class="main-nav text-center">
                         <ul class="clearfix">
                             <li class=" ">
-                                <a href="/collections/san-pham-moi-nhat?itm_source=homepage&amp;itm_medium=menu&amp;itm_campaign=normal&amp;itm_content=newin"
+                                <a href="/product/new-product"
                                     title="Hàng Mới Về">
                                     Hàng Mới Về
                                 </a>
@@ -117,7 +117,7 @@
                             $count = 0;
                 ?>
                             <li class=" ">
-                                <a href="/collections/giay?itm_source=homepage&amp;itm_medium=menu&amp;itm_campaign=normal&amp;itm_content=giay"
+                                <a href="/product/{{$item_parent->uri}}"
                                     title="Giày">
                                     {{$item_parent->name}}
                                     <i style="font-size: 14px" class="icofont-simple-down"></i>
@@ -126,7 +126,7 @@
                                     <div class="col-xs-12 col-sm-3">
                                         @foreach ($category_son as $item_son)
                                         <li class>
-                                            <a href="https://juno.vn/collections/giay-cao-got?itm_source=homepage&amp;itm_medium=menu&amp;itm_campaign=normal&amp;itm_content=cg"
+                                        <a href="/product/{{$item_son->uri}}"
                                                 title="Giày cao gót">
                                                 {{$item_son->name}}
                                             </a>
@@ -156,15 +156,9 @@
                 </li>
                 @endforeach
                 <li class=" ">
-                    <a href="https://juno.vn/collections/list-collections?itm_source=homepage&amp;itm_medium=menu&amp;itm_campaign=normal&amp;itm_content=bosuutap"
-                        title="Bộ Sưu Tập">
-                        Bộ Sưu Tập
-                    </a>
-                </li>
-                <li class=" ">
-                    <a href="/pages/khachhangthanthiet?itm_source=homepage&amp;itm_medium=menu&amp;itm_campaign=normal&amp;itm_content=membership"
-                        title="Membership">
-                        Membership
+                    <a style="color:red;" href="/product/sale"
+                        title="Sản phẩm đang giảm giá">
+                        Sale Đón Thu
                     </a>
                 </li>
                 </ul>

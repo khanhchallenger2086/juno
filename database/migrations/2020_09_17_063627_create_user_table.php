@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilterTable extends Migration
+class CreateUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class CreateFilterTable extends Migration
      */
     public function up()
     {
-        Schema::create('filter', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255)->nullable();
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
+            $table->rememberToken();
+            $table->softDeletes('deleted_at')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateFilterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filter');
+        Schema::dropIfExists('user');
     }
 }

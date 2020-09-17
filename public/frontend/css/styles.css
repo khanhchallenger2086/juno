@@ -1103,11 +1103,11 @@ button.btn-addtocart[disabled] {opacity: 0.8;}
 	background: url(../images/sold_out.png) no-repeat;
 	background-size: contain;
 }
-//.swatch .swatch-element.soldout label{opacity:0.5}
+.swatch .swatch-element.soldout label{opacity:0.5}
 .swatch .swatch-element.color label{
 	width: 35px;
 	height: 35px;
-	padding: 1px;
+	padding: 2px;
 	border-radius: 50%;
 	line-height: 28px;
 	border: 1px solid #b0b0b0;

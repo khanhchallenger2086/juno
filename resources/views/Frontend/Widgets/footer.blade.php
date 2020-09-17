@@ -53,22 +53,22 @@
                 <input type="hidden" name="thankyou_url" value="https://juno.vn/pages/thank-you" />
                 <input type="hidden" name="forward_data" value />
                 <input
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   type="email"
                   value
                   name="EMAIL"
                   class="newsletter-input form-control input-lg email"
-                  id="mce-EMAIL"
+                  id="send-email"
                   placeholder="Nhập email của bạn tại đây..."
                   required
                 />
                 <div style="position: absolute; left: -5000px" aria-hidden="true">
                   <input type="text" name="b_c6a1ff4613972aee4c6da0254_380ebe08a5" tabindex="-1" value />
                 </div>
-                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn-newsletter">
+                <button type="button" name="subscribe" id="mc-embedded-subscribe" class="btn-newsletter">
                   <span>Đăng ký</span>
                 </button>
               </div>
+              <p class="d-none check-mail text-danger">Bạn phải nhập đúng định dạng email</p>
             </form>
             <div id="ins-subscribe-wrapper-1255">
               <input type="checkbox" id="ins-checkbox-1255" /><label for="ins-checkbox-1255">Tôi đồng ý với các điều kiện &amp; điều khoản.</label>
@@ -181,8 +181,8 @@
               fb-xfbml-state="rendered"
               fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=&amp;container_width=158&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fgiayjuno&amp;locale=vi_VN&amp;sdk=joey&amp;show_facepile=false&amp;small_header=false&amp;tabs=&amp;width="
             >
-              <span style="vertical-align: bottom; width: 180px; height: 130px"
-                ><iframe
+              <span style="vertical-align: bottom; width: 180px; height: 130px">
+                {{-- <iframe
                   name="f56f6bebe076d8"
                   width="1000px"
                   height="1000px"
@@ -196,8 +196,9 @@
                   src="unsupportedbrowser.html"
                   style="border: none; visibility: visible; width: 180px; height: 130px"
                   class
-                ></iframe
-              ></span>
+                >
+                </iframe >--}}
+              </span>
             </div>
           </ul>
         </div>
