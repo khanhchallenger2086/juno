@@ -249,7 +249,7 @@ function filter($page,$more) {
                                             </div>
                                             <div class="actionLoop visible-lg">
                                                 <a class="quickView styleBtnBuy notClick" data-handle="/products/giay-xang-dan-quai-ngang-ban-to-sd01057"><i class="fa fa-shopping-cart"></i> Mua nhanh</a>
-                                                <a class="styleBtnBuy" href="/products/giay-xang-dan-quai-ngang-ban-to-sd01057?color=do_do"><i class="fa fa-eye"></i> Xem chi tiết</a>
+                                                <a class="styleBtnBuy" href="/product-detail/${$item.uri}"><i class="fa fa-eye"></i> Xem chi tiết</a>
                                             </div>
                                         </div>
                                     </div>
@@ -309,7 +309,7 @@ function filter($page,$more) {
                                                         </div>
                                                         <div class="actionLoop visible-lg">
                                                             <a class="quickView styleBtnBuy notClick" data-handle="/products/giay-xang-dan-quai-ngang-ban-to-sd01057"><i class="fa fa-shopping-cart"></i> Mua nhanh</a>
-                                                            <a class="styleBtnBuy" href="/products/giay-xang-dan-quai-ngang-ban-to-sd01057?color=do_do"><i class="fa fa-eye"></i> Xem chi tiết</a>
+                                                            <a class="styleBtnBuy" href="/product-detail/${$item.uri}"><i class="fa fa-eye"></i> Xem chi tiết</a>
                                                         </div>
                                                     </div>
                                                 </div>

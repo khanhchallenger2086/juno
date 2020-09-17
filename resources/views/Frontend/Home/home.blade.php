@@ -95,7 +95,7 @@
                                         <a class="quickView styleBtnBuy notClick"
                                             data-handle="/products/gia-y-cao-go-t-slingback-khoa-trang-tri-luc-giac-j"><i
                                                 class="icofont-shopping-cart"></i> Mua nhanh</a>
-                                        <a class="styleBtnBuy" href="/products/gia-y-cao-go-t-slingback-khoa-trang-tri-luc-giac-j?color=xam"><i
+                                        <a class="styleBtnBuy" href="{{ Route('p.product-detail',$item_product->uri ?? "ko co uri") }}"><i
                                                 class="icofont-eye"></i> Xem chi tiết</a>
                                     </div>
                                 </div>
