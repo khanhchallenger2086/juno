@@ -72,7 +72,6 @@ class ProductController extends Controller
     {
         $request->validate(
             [
-                'name' => 'required',
                 'size' => 'required',
                 'color' => 'required',
                 'image_main' => 'required',
@@ -82,7 +81,7 @@ class ProductController extends Controller
                 'id_category' => 'required',
             ],
             [
-                'name.required' => 'Vui lòng nhập tên sản phẩm',
+                "name.required" => 'Vui lòng nhập tên sản phẩm',
                 'size.required' => 'Vui lòng nhập kích thước',
                 'color.required' => 'Vui lòng nhập màu sắc',
                 'image_main.required' => 'Vui lòng nhập ảnh đại diện',
@@ -91,7 +90,6 @@ class ProductController extends Controller
                 'material.required' => 'Vui lòng nhập chất liệu',
                 'id_category.required' => 'Vui lòng nhập danh mục',
             ]
-
         );
 
         $main_image =  $this->process_image($request->image_main);
@@ -280,6 +278,19 @@ class ProductController extends Controller
             return redirect()->back()->with(["msg" => "Xóa Thành Công"]);
         } else {
             return redirect()->route('product.index')->with(["msg" => "Xóa Thành Công"]);
+        }
+    }
+
+    public function check_name(Request $rq) {
+        $a = DB::table('products')->where('name',$rq->name)->first();
+        if ($a) {
+            return response()->json([
+                'error' => 'Tên đã tồn tại'
+            ]);
+        } else {
+            return response()->json([
+                'error' => ''
+            ]);
         }
     }
 }

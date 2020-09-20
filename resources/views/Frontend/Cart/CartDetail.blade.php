@@ -119,7 +119,7 @@
                                 @if (  session()->get('total_buy') > 0 )
                                 <div class="cart-buttons">
 									<a  href="/payment" id="checkout" class="checkLimitCart">Tiến hành đặt hàng</a>
-                                    <a class="link-continue" href="{{ URL::previous() }}" title="Tiếp tục mua hàng">Mua thêm sản phẩm</a>
+                                    <a class="link-continue" href="/home" title="Tiếp tục mua hàng">Mua thêm sản phẩm</a>
                                 </div>
                                 @endif
 

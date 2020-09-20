@@ -93,7 +93,7 @@ $(document).ready(function () {
         $page = $('.more').attr('data-page');
 
         if ($page == "") {
-            $('.more').attr('data-page',0);
+            $('.more').attr('data-page',1);
         } else {
             if (parseInt($page) < $('#amount').val()) {
                 $('.more').attr('data-page',parseInt($page) + 1);
@@ -124,7 +124,7 @@ $(document).ready(function () {
 });
 
 window.onload = function (){
-    $('.more').attr('data-page',0);
+    $('.more').attr('data-page',1);
 }
 
 function validateEmail(email) {
@@ -133,6 +133,7 @@ function validateEmail(email) {
 }
 
 function filter($page,$more) {
+    $("#no-product-default").remove();
     let sColor = [], sSize = [], sStyle = [], sMaterial = [];
     var amount = $('#amount').val();
 
@@ -248,8 +249,8 @@ function filter($page,$more) {
                                                 <div class="trendingNew">Chỉ bán online</div>
                                             </div>
                                             <div class="actionLoop visible-lg">
-                                                <a class="quickView styleBtnBuy notClick" data-handle="/products/giay-xang-dan-quai-ngang-ban-to-sd01057"><i class="fa fa-shopping-cart"></i> Mua nhanh</a>
-                                                <a class="styleBtnBuy" href="/product-detail/${$item.uri}"><i class="fa fa-eye"></i> Xem chi tiết</a>
+                                                <a class="styleBtnBuy" href="/product-detail/${$item.uri}"><i
+                                                class="icofont-shopping-cart">Mua Ngay</a>
                                             </div>
                                         </div>
                                     </div>
@@ -308,8 +309,7 @@ function filter($page,$more) {
                                                             <div class="trendingNew">Chỉ bán online</div>
                                                         </div>
                                                         <div class="actionLoop visible-lg">
-                                                            <a class="quickView styleBtnBuy notClick" data-handle="/products/giay-xang-dan-quai-ngang-ban-to-sd01057"><i class="fa fa-shopping-cart"></i> Mua nhanh</a>
-                                                            <a class="styleBtnBuy" href="/product-detail/${$item.uri}"><i class="fa fa-eye"></i> Xem chi tiết</a>
+                                                            <a class="styleBtnBuy" href="/product-detail/${$item.uri}"><i class="icofont-shopping-cart"> </i> Mua Ngay</a>
                                                         </div>
                                                     </div>
                                                 </div>

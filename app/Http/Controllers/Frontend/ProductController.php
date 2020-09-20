@@ -61,6 +61,7 @@ class ProductController extends Controller
         }
         $color = Color::get()->all();
 
+
         return view('Frontend.Product.product', [
             'category_parent' => $category_parent,
             'all' => $all,

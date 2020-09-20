@@ -2,8 +2,8 @@
 @section('content')
 @if (session()->has('msg'))
 <p class="btn btn-success mb-2">{{session('msg')}}</p>
-
 @endif
+
 <div class="table-agile-info">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -12,7 +12,6 @@
         <div class="form">
             <form class="pt-4 pb-4 cmxform form-horizontal" method="post" action="{{$action}}" enctype="multipart/form-data">
                 {{-- Bị lặp code ở hàm xem lại và viết ra hàm chung --}}
-
                 @if (isset($edit))
                 <div class="form-group ">
                     <label for="cname" class="control-label col-lg-3">Mã sản phẩm</label>
@@ -26,15 +25,14 @@
                 <div class="form-group ">
                     <label for="cname" class="control-label col-lg-3">Tên</label>
                     <div class="col-lg-6">
-                        <input class="form-control" name="name" value="{{ isset($product) ? $product->name : "" }}" type="text"
-                            placeholder="Tên Sản Phẩm">
+                        <input class="form-control" name="name" value="{{ isset($product) ? $product->name  : "" }}" id="name-product" type="text"
+                            placeholder="Tên Sản Phẩm" autocomplete="off">
                         {{-- <p>{{ $errors->get('name') ? $errors->first('name') : "" }}</p> --}}
                         <p class="text-danger">@error('name') {{ $errors->first('name') }} @enderror</p>
                     </div>
                 </div>
 
                 @if (!isset($edit))
-
                     <div class="form-group">
                         <label for="curl" class="control-label col-lg-3">Màu sắc</label>
                         <div class="col-lg-6">

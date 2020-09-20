@@ -148,6 +148,25 @@ $(document).ready(function () {
         $(this).parent('div').siblings('ul').removeClass('d-none');
         // $(this).unbind(alert(123));
     });
+
+    $('#name-product').keyup(function(){
+        var url = "/admin/product/check-name";
+        var data = {
+            name: $(this).val(),
+        };
+        $.get(url, data)
+            .done(function (data) {
+                $('#name-product').siblings('p').text(data.error);
+                if (data.error != "") {
+                    $("#submit").attr("disabled", true);
+                } else {
+                    $("#submit").attr("disabled", false);
+                }
+            })
+            .fail(function (data) {
+                console.log("thất bại");
+            });
+    });
 });
 
 function xoa_dau(str) {

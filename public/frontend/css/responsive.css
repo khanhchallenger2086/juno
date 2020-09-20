@@ -455,7 +455,7 @@
 		clear: both;
 	}
 
-	.btnLoadMore a, 
+	.btnLoadMore a,
 	.btnLoadMore1 a {
 		padding: 12px 30px;
 	}
@@ -1178,7 +1178,7 @@
 	}
 	.actionLoop a {
 		float: left;
-		width: 50%;
+		width: 100%;
 		color: white;
 		text-align: center;
 		padding: 3px 10px;

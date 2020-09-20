@@ -16,13 +16,13 @@
             <div class="sectionTitleTab clearfix">
                 {{-- danh mục --}}
                 <h2>
-                <a href="{{ Route('p.product',$item_parent->uri) }}"> {{$item_parent->name}} </a>
+                <a href="{{ Route('p.product',$item_parent->uri ?? "ko co uri") }}"> {{$item_parent->name}} </a>
                 </h2>
                 <div class="outerTabTitle">
                     <ul class="tabTitle">
                         @foreach ($category_son as $item_son)
                         <li data-slide="tab1_slide1">
-                            <a data-toggle="tab" href="{{ Route('p.product',$item_son->uri) }}" > {{$item_son->name}} </a>
+                            <a data-toggle="tab" href="{{ Route('p.product',$item_son->uri ?? "ko co uri") }}" > {{$item_son->name}} </a>
                         </li>
                         @endforeach
                     </ul>
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="box-pro-detail">
                                             <h3 class="pro-name">
-                                                <a href="{{ Route('p.product-detail',$item_product->uri ?? "ko co uri") }}"
+                                                <a href="{{ Route('p.product-detail',$item_product->uri ?? "#") }}"
                                                     title="Giày cao gót slingback khóa trang trí lục giác j">
                                                     {{$item_product->name}}
                                                 </a>
@@ -92,11 +92,8 @@
                                         <div class="labelNewNew styleTogetherLabel">MẪU MỚI</div>
                                     </div>
                                     <div class="actionLoop visible-lg">
-                                        <a class="quickView styleBtnBuy notClick"
-                                            data-handle="/products/gia-y-cao-go-t-slingback-khoa-trang-tri-luc-giac-j"><i
-                                                class="icofont-shopping-cart"></i> Mua nhanh</a>
-                                        <a class="styleBtnBuy" href="{{ Route('p.product-detail',$item_product->uri ?? "ko co uri") }}"><i
-                                                class="icofont-eye"></i> Xem chi tiết</a>
+                                        <a class="styleBtnBuy" href="{{ Route('p.product-detail',$item_product->uri ?? "#") }}"><i
+                                            class="icofont-shopping-cart"></i>Mua Ngay</a>
                                     </div>
                                 </div>
                             </div>

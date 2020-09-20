@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/post-login', 'Backend\AdminController@post_login')->name('auth.login');
     Route::get('/logout', 'Backend\AdminController@logout')->name('auth.logout');
     // product
+    Route::get('product/check-name','Backend\productController@check_name')->name('product.check_name');
     Route::get('product/restore_trash', 'Backend\productController@restore_trash')->name('product.restore_trash');
     Route::get('product/{id}/destroy_trash', 'Backend\productController@destroy_trash')->name('product.destroy_trash'); // xóa cứng
     Route::get('product/trash', 'Backend\productController@trash')->name('product.trash');

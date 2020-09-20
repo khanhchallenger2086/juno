@@ -33,7 +33,7 @@
 										<span class="visible-xs">Bộ lọc</span>
 									</a>
 								</div>
-								<div class="borderFilterMobile option browse-tags">
+								{{-- <div class="borderFilterMobile option browse-tags">
 									<label class="lb-filter" for="sort-by">Sắp xếp theo:</label>
 									<span class="custom-dropdown custom-dropdown--grey">
 										<span class="visible-xs btnSortMobile">
@@ -47,7 +47,7 @@
 											<option value="best-selling" data-filter="&amp;sortby=(sold_quantity:product=desc)">Bán chạy nhất</option>
 										</select>
 									</span>
-								</div>
+								</div> --}}
 							</div>
 						</div>
 					</div>
@@ -206,21 +206,24 @@
 
                     </div>
                     <div class="actionLoop visible-lg">
-                        <a class="quickView styleBtnBuy notClick" data-handle="/products/giay-xang-dan-quai-ngang-ban-to-sd01057"><i class="fa fa-shopping-cart"></i> Mua nhanh</a>
-                        <a class="styleBtnBuy" href="{{ Route('p.product-detail',$item->uri ?? "ko co uri") }}"><i class="fa fa-eye"></i> Xem chi tiết</a>
+                        <a class="styleBtnBuy" href="{{ Route('p.product-detail',$item->uri ?? "ko co uri") }}"><i
+                            class="icofont-shopping-cart"></i>Mua Ngay</a>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
                             {{-- {{ $list->links() }} --}}
+                            <p id="no-product-default" class="text-center">{{ $list->toArray() == [] ? "Không có sản phẩm nào" : ''  }}</p>
 
         <?php
 
         ?>
+        @if ($list->toArray() != [])
         <div class="text-center">
             <a class="btn btn-primary more" data-page=""  >Xem thêm</a>
         </div>
+        @endif
         <input type="hidden" value="{{$uri}}" id="sale" >
         <input type="hidden" value="{{$amount}}" id="amount" >
 					<div class="btnLoadMore" style="display: none;">
