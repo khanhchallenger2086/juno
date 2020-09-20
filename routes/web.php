@@ -16,6 +16,7 @@ use Illuminate\Http\Client\Request;
 // Route::get('/lang-{lang}', 'Frontend\LangController@lang');
 // Route::get('/test', 'Frontend\LangController@test')->middleware('locale');
 
+Route::get('/', 'Frontend\HomeController@home');
 Route::get('/home', 'Frontend\HomeController@home');
 Route::get('/filter', 'Frontend\AjaxController@filter');
 Route::get('/product/{uri}', 'Frontend\ProductController@product')->name('p.product');
@@ -26,6 +27,7 @@ Route::get('/cart', 'Frontend\CartController@cart_detail')->name('c.cart-detail'
 
 // payment
 Route::get('/payment', 'Frontend\CartController@payment');
+Route::post('/complete-payment', 'Frontend\CartController@complete_payment');
 
 // Ajax
 Route::post('/add-cart-ajax', 'Frontend\AjaxController@add_cart_ajax')->name('ajax.add-cart');

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'orders';
+    protected $fillable = ['id_customer','code','payment_method','payment_status','created_at','updated_at','total_order'];
 
     public function OrderDetail()
     {

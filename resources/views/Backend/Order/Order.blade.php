@@ -23,7 +23,7 @@
             <div class="form-group ">
                 <label for="curl" class="control-label col-lg-3">Email</label>
                 <div class="col-lg-6">
-                    <input class="form-control" type="number" readonly id="email" value="" required>
+                    <input class="form-control" type="email" readonly id="email" value="1212" required>
                 </div>
             </div>
             <div class="form-group ">
@@ -60,7 +60,7 @@
                         <td>{{ $item->payment_status == 1 ? "Đã thanh toán" : "Chưa thanh toán" }}</td>
                         <td>{{ $item->note_from_customer }}</td>
                         <td>
-                            <a class="btn btn-primary " href="#" id="info_customer" data-id="{{ $item->id_customer }}">Thông tin KH</a>
+                            <a class="btn btn-primary info_customer" href="#"  data-id="{{ $item->id_customer }}">Thông tin KH</a>
                             <a class="btn btn-primary openvariant" href="#" data-id="{{$item->id}}">Chi tiết</a>
                             <a class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa đơn hàng này không ?')"
                                 href="{{ Route('order.delete',$item->id) }}">Xóa</a>

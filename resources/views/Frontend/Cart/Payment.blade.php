@@ -19,36 +19,44 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <?php
+                                            $tonggia = 0;
+                                        ?>
+                                    @if (session()->has('cart'))
+                                        @foreach (session()->get('cart') as $item_cart)
+                                        <?php
+                                            $tonggia += $item_cart->buy * $item_cart->variant['price'];
+                                        ?>
                                         <tr class="product" data-product-id="1028004035" data-variant-id="1061095904">
                                             <td class="product-image">
                                                 <div class="product-thumbnail">
                                                     <div class="product-thumbnail-wrapper">
                                                         <img class="product-thumbnail-image" alt="Giày sandal dây hậu đan chéo" src="//product.hstatic.net/1000003969/product/trang_sd07053_4_6635c3ad2ada4899ba235889819165d7_small.jpg">
                                                     </div>
-                                                    <span class="product-thumbnail-quantity" aria-hidden="true">1</span>
+                                                    <span class="product-thumbnail-quantity" aria-hidden="true">{{$item_cart->buy}}</span>
                                                 </div>
                                             </td>
                                             <td class="product-description">
-                                                <span class="product-description-name order-summary-emphasis">Giày sandal dây hậu đan chéo</span>
+                                            <span class="product-description-name order-summary-emphasis">{{$item_cart->name}}</span>
 
                                                     <span class="product-description-variant order-summary-small-text">
-                                                        36 / Trắng
+                                                        {{$item_cart->variant['size']}} / {{$item_cart->variant['color']}}
                                                     </span>
 
                                             </td>
-                                            <td class="product-quantity visually-hidden">1</td>
+                                        <td class="product-quantity visually-hidden">{{$item_cart->buy}}</td>
                                             <td class="product-price">
-                                                <span class="order-summary-emphasis">455,000₫</span>
+                                                <span class="order-summary-emphasis">{{number_format($item_cart->variant['price'])}}₫</span>
                                             </td>
                                         </tr>
-
+                                        @endforeach
+                                        @endif
                                 </tbody>
                             </table>
                         </div>
 
                             <div class="order-summary-section order-summary-section-discount" data-order-summary-section="discount">
-                                <form id="form_discount_add" accept-charset="UTF-8" method="post">
+                                {{-- <form id="form_discount_add" accept-charset="UTF-8" method="post"> --}}
                                   <input name="utf8" type="hidden" value="✓">
                                     <div class="fieldset"><div style="color:#f77705;margin-left:9px;font-weight:bold;display:none;">Nhập mã giảm giá tại đây (nếu có)</div>
                                         <div class="field  ">
@@ -57,7 +65,7 @@
                                                     <label class="field-label" for="discount.code">Mã giảm giá</label>
                                                     <input placeholder="Mã giảm giá" class="field-input" data-discount-field="true" autocomplete="off" autocapitalize="off" spellcheck="false" size="30" type="text" id="discount.code" name="discount.code" value="">
                                                 </div>
-                                                <button type="submit" class="field-input-btn btn btn-default btn-disabled">
+                                                <button disabled type="submit" class="field-input-btn btn btn-default btn-disabled">
                                                     <span class="btn-content">Sử dụng</span>
                                                     <i class="btn-spinner icon icon-button-spinner"></i>
                                                 </button>
@@ -65,7 +73,7 @@
 
                                         </div>
                                     </div>
-                                </form>
+                                {{-- </form> --}}
                             </div>
 
 
@@ -82,7 +90,7 @@
                                         <td class="total-line-name">Tạm tính</td>
                                         <td class="total-line-price">
                                             <span class="order-summary-emphasis" data-checkout-subtotal-price-target="45500000">
-                                                455,000₫
+                                                {{ isset($tongtien) ? number_format($tongtien) . "đ": "0đ" }}
                                             </span>
                                         </td>
                                     </tr>
@@ -107,7 +115,7 @@
                                         <td class="total-line-name payment-due">
                                             <span class="payment-due-currency">VND</span>
                                             <span class="payment-due-price" data-checkout-payment-due-target="45500000">
-                                                455,000₫
+                                                {{ isset($tongtien) ? number_format($tongtien) . "đ": "0đ" }}
                                             </span>
                                         </td>
                                     </tr>
@@ -142,83 +150,27 @@
                     <div class="step">
                         <div class="step-sections steps-onepage" step="1">
 
-                                <script async="" src="https://hoian.ai/hoian.js"></script>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H9DPZ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script src="//go.ecotrackings.com/eco_tracking.js" type="text/javascript"></script>
-<script>
-var eco_token = "anVuby52bg==";
-var eco_data = {
-"offer_id": "junovn",
-"transaction_id": "",
-"transaction_time": "",
-"session_ip": "",
-"traffic_id": eco_cps.get_traffic_id(),
-"products": [
-
-
-{
-"id": "1028004035",
-"sku": "8935281569033",
-"category": "Tất cả sản phẩm juno",
-"price": "455000",
-"name": "Giày sandal dây hậu đan chéo",
-"commission": "15%",
-"status_code": "0",
-"quantity": "1",
-}
-
-
-]
-};
-</script>
-<script src="//go.ecotrackings.com/eco_px.js?time=123123123" type="text/javascript"></script>
-<script>
-$.get('https://theme.hstatic.net/1000003969/1000574762/14/checkout-handler.js?v='+(new Date).getTime()).then(function(data) {eval(data);})
-!function(e,t,n){var a=t.getElementsByTagName(n)[0],c=t.createElement(n);c.async=false,c.src="https://theme.hstatic.net/1000003969/1000574762/14/main-tracking-new.js?v="+(new Date).getTime(),a.parentNode.insertBefore(c,a)}(window,document,"script");
-</script>
-<script>
-!function(e,t,n){var a=t.getElementsByTagName(n)[0],c=t.createElement(n);c.async=false,c.src="https://theme.hstatic.net/1000003969/1000574762/14/cityads-checkout.js?v="+(new Date).getTime(),a.parentNode.insertBefore(c,a)}(window,document,"script");
-</script>
-<script>
-$(document).ready(function(){
-$('.section-customer-information .section-content-text').hide();
-if ( window.location.href.indexOf('checkout') ) {
-$('#form_update_location').parent().append('<h3 class="notice" style="color:#f77705;font-style:italic;margin: 1.5em auto 0.3em 5px;">Vui lòng nhập đầy đủ thông tin địa chỉ để nhận hàng nhanh hơn!</h3>');
-$('.order-summary.order-summary-is-collapsed').find('h3').remove();
-$('.order-summary.order-summary-is-collapsed').append('<h3 class="notice-checkout" style="font-weight: 400; padding: 10px; border: 1px solid #f77705; line-height: 18px; margin: 0;">Juno sẽ XÁC NHẬN đơn hàng bằng TIN NHẮN SMS hoặc GỌI ĐIỆN. Bạn vui lòng kiểm tra TIN NHẮN hoặc NGHE MÁY ngay khi đặt hàng thành công và CHỜ NHẬN HÀNG</h3>');
-}
-$('input[data-discount-field="true"]').closest('.fieldset').prepend('<div style="color:#f77705;margin-left:9px;font-weight:bold;display:none;">Nhập mã giảm giá tại đây (nếu có)</div>')
-})
-</script>
-<script async="" src="//juno.api.useinsider.com/ins.js?id=10001662"></script>
-<script src="https://file.hstatic.net/1000003969/file/insider-sw-sdk_02bfc88d694144209235899c674c0668.js?v=juno2019" type="text/javascript"></script>
-<script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async="" defer="" gapi_processed="true"></script>
-
-
-
+                            <form action="/complete-payment" method="post">
                                 <div class="section">
                                     <div class="section-header">
                                         <h2 class="section-title">Thông tin giao hàng</h2>
                                     </div>
-                                    <div class="section-content section-customer-information no-mb">
+                                    <div class="section-content section-customer-information mb-4">
 
 
-                                            <p class="section-content-text" style="display: none;">
+                                            {{-- <p class="section-content-text" style="display: none;">
                                                 Bạn đã có tài khoản?
                                                 <a href="/account/login?urlredirect=%2Fcheckouts%2F0bf310bd55124b8591b7a151e0c88a1a%3Fstep%3D1">Đăng nhập</a>
-                                            </p>
+                                            </p> --}}
 
 
                                         <div class="fieldset">
-
-
                                                 <div class="field field-required  ">
                                                     <div class="field-input-wrapper">
                                                         <label class="field-label" for="billing_address_full_name">Họ và tên</label>
-                                                        <input placeholder="Họ và tên" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="text" id="billing_address_full_name" name="billing_address[full_name]" value="">
+                                                        <input placeholder="Họ và tên" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="text" id="billing_address_full_name" name="name" value="">
                                                     </div>
-
+                                                    <p style="color:red" class="text-danger">@error('name') {{ $errors->first('name') }} @enderror</p>
                                                 </div>
 
 
@@ -226,9 +178,9 @@ $('input[data-discount-field="true"]').closest('.fieldset').prepend('<div style=
                                                     <div class="field  field-two-thirds  ">
                                                         <div class="field-input-wrapper">
                                                             <label class="field-label" for="checkout_user_email">Email</label>
-                                                            <input placeholder="Email" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="email" id="checkout_user_email" name="checkout_user[email]" value="">
+                                                            <input placeholder="Email" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="email" id="checkout_user_email" name="email" value="">
                                                         </div>
-
+                                                        <p style="color:red" class="text-danger">@error('email') {{ $errors->first('email') }} @enderror</p>
                                                     </div>
 
 
@@ -236,23 +188,23 @@ $('input[data-discount-field="true"]').closest('.fieldset').prepend('<div style=
                                                 <div class="field field-required field-third  ">
                                                     <div class="field-input-wrapper">
                                                         <label class="field-label" for="billing_address_phone">Số điện thoại</label>
-                                                        <input placeholder="Số điện thoại" autocapitalize="off" spellcheck="false" class="field-input" size="30" maxlength="10" type="tel" id="billing_address_phone" name="billing_address[phone]" value="">
+                                                        <input placeholder="Số điện thoại" autocapitalize="off" spellcheck="false" class="field-input" size="30" maxlength="10" type="tel" id="billing_address_phone" name="phone" value="">
                                                     </div>
-
+                                                    <p style="color:red" class="text-danger">@error('phone') {{ $errors->first('phone') }} @enderror</p>
                                                 </div>
 
 
                                                 <div class="field field-required  ">
                                                     <div class="field-input-wrapper">
                                                         <label class="field-label" for="billing_address_address1">Địa chỉ</label>
-                                                        <input placeholder="Địa chỉ" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="text" id="billing_address_address1" name="billing_address[address1]" value="">
+                                                        <input placeholder="Địa chỉ" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="text" id="billing_address_address1" name="address" value="">
                                                     </div>
-
+                                                    <p style="color:red" class="text-danger">@error('address') {{ $errors->first('address') }} @enderror</p>
                                                 </div>
 
                                         </div>
                                     </div>
-                                    <div class="section-content">
+                                    {{-- <div class="section-content">
                                         <div class="fieldset">
 
                                                 <form id="form_update_location" class="clearfix order-checkout__loading" accept-charset="UTF-8" method="post">
@@ -571,25 +523,8 @@ $('input[data-discount-field="true"]').closest('.fieldset').prepend('<div style=
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div id="change_pick_location_or_shipping">
-
-
-
-                                                <div id="section-shipping-rate">
-                                                    <div class="section-header">
-                                                        <h2 class="section-title">Phương thức vận chuyển</h2>
-                                                    </div>
-                                                    <div class="section-content">
-
-                                                        <div class="content-box  blank-slate">
-                                                            <i class="blank-slate-icon icon icon-closed-box "></i>
-                                                            <p>Vui lòng chọn tỉnh / thành để có danh sách phương thức vận chuyển.</p>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
                                             <div id="section-payment-method" class="section">
                                                 <div class="section-header">
                                                     <h2 class="section-title">Phương thức thanh toán</h2>
@@ -601,27 +536,27 @@ $('input[data-discount-field="true"]').closest('.fieldset').prepend('<div style=
                                                         <div class="radio-wrapper content-box-row">
                                                             <label class="radio-label" for="payment_method_id_6381">
                                                                 <div class="radio-input">
-                                                                    <input id="payment_method_id_6381" class="input-radio" name="payment_method_id" type="radio" value="6381" checked="">
+                                                                    <input id="payment_method_id_6381" class="input-radio" name="payment" type="radio" value="6381" checked="">
                                                                 </div>
                                                                 <span class="radio-label-primary">Thanh toán khi nhận hàng (COD)</span>
                                                             </label>
                                                         </div>
 
-
+{{--
                                                         <div class="radio-wrapper content-box-row">
                                                             <label class="radio-label" for="payment_method_id_532042">
                                                                 <div class="radio-input">
-                                                                    <input id="payment_method_id_532042" class="input-radio" name="payment_method_id" type="radio" value="532042">
+                                                                    <input id="payment_method_id_532042" class="input-radio" name="payment" type="radio" value="532042">
                                                                 </div>
                                                                 <div class="iconLogo1" style="margin-right:10px;"><img style="max-height:25px;" src="//file.hstatic.net/1000003969/file/napas.png"></div><span class="radio-label-primary">Thanh toán online qua cổng Napas bằng thẻ ATM nội địa</span>
                                                             </label>
-                                                        </div>
+                                                        </div> --}}
 
 
                                                         <div class="radio-wrapper content-box-row">
                                                             <label class="radio-label" for="payment_method_id_600773">
                                                                 <div class="radio-input">
-                                                                    <input id="payment_method_id_600773" class="input-radio" name="payment_method_id" type="radio" value="600773">
+                                                                    <input id="payment_method_id_600773" class="input-radio" name="payment" type="radio" value="napas">
                                                                 </div>
                                                                 <div class="iconLogo1a" style="margin-right:10px;"><img style="max-height:25px;" src="//file.hstatic.net/1000003969/file/napas.png"></div><span class="radio-label-primary">Thanh toán online qua cổng Napas bằng thẻ Visa/Master Card</span>
                                                             </label>
@@ -631,7 +566,7 @@ $('input[data-discount-field="true"]').closest('.fieldset').prepend('<div style=
                                                         <div class="radio-wrapper content-box-row">
                                                             <label class="radio-label" for="payment_method_id_1000746447">
                                                                 <div class="radio-input">
-                                                                    <input id="payment_method_id_1000746447" class="input-radio" name="payment_method_id" type="radio" value="1000746447">
+                                                                    <input id="payment_method_id_1000746447" class="input-radio" name="payment" type="radio" value=momo">
                                                                 </div>
                                                                 <div class="iconLogo3"><img style="max-height:25px;margin-right:10px" src="//file.hstatic.net/1000003969/file/momo.png"></div><span class="radio-label-primary">Thanh toán online qua ví MoMo</span>
                                                             </label>
@@ -641,31 +576,31 @@ $('input[data-discount-field="true"]').closest('.fieldset').prepend('<div style=
                                                         <div class="radio-wrapper content-box-row">
                                                             <label class="radio-label" for="payment_method_id_1021000">
                                                                 <div class="radio-input">
-                                                                    <input id="payment_method_id_1021000" class="input-radio" name="payment_method_id" type="radio" value="1021000">
+                                                                    <input id="payment_method_id_1021000" class="input-radio" name="payment" type="radio" value="zalopay">
                                                                 </div>
                                                                 <div class="iconLogo2a"><img style="max-height:20px;" src="//file.hstatic.net/1000003969/file/logozlp1.png"></div><span class="radio-label-primary">Thanh toán online qua ứng dụng ZaloPay bằng QRCode</span>
                                                             </label>
                                                         </div>
 
 
-                                                        <div class="radio-wrapper content-box-row">
+                                                        {{-- <div class="radio-wrapper content-box-row">
                                                             <label class="radio-label" for="payment_method_id_1021010">
                                                                 <div class="radio-input">
                                                                     <input id="payment_method_id_1021010" class="input-radio" name="payment_method_id" type="radio" value="1021010">
                                                                 </div>
                                                                 <div class="iconLogo2"><img style="max-height:20px;" src="//file.hstatic.net/1000003969/file/logozlp1.png"></div><span class="radio-label-primary">Thanh toán online qua cổng ZaloPay bằng thẻ ATM nội địa</span>
                                                             </label>
-                                                        </div>
+                                                        </div> --}}
 
 
-                                                        <div class="radio-wrapper content-box-row">
+                                                        {{-- <div class="radio-wrapper content-box-row">
                                                             <label class="radio-label" for="payment_method_id_971568">
                                                                 <div class="radio-input">
-                                                                    <input id="payment_method_id_971568" class="input-radio" name="payment_method_id" type="radio" value="971568">
+                                                                    <input id="payment_method_id_971568" class="input-radio" name="payment" type="radio" value="971568">
                                                                 </div>
                                                                 <div class="iconLogo2b"><img style="max-height:20px;" src="//file.hstatic.net/1000003969/file/logozlp1.png"></div><span class="radio-label-primary">Thanh toán online qua cổng ZaloPay bằng thẻ Visa/Master/JCB</span>
                                                             </label>
-                                                        </div>
+                                                        </div> --}}
 
 
 
@@ -674,29 +609,25 @@ $('input[data-discount-field="true"]').closest('.fieldset').prepend('<div style=
                                             </div>
 
                                     </div>
-                                </div>
+                                </div>@csrf
+                                <div class="step-footer">
 
-
-                        </div>
-                        <div class="step-footer">
-
-                                <form id="form_next_step" accept-charset="UTF-8" method="post">
                                     <input name="utf8" type="hidden" value="✓">
                                     <button type="submit" class="step-footer-continue-btn btn">
                                         <span class="btn-content">Hoàn tất đơn hàng</span>
                                         <i class="btn-spinner icon icon-button-spinner"></i>
                                     </button>
-                                </form>
-                                <a class="step-footer-previous-link" href="/cart">
-                                    <svg class="previous-link-icon icon-chevron icon" xmlns="http://www.w3.org/2000/svg" width="6.7" height="11.3" viewBox="0 0 6.7 11.3"><path d="M6.7 1.1l-1-1.1-4.6 4.6-1.1 1.1 1.1 1 4.6 4.6 1-1-4.6-4.6z"></path></svg>
-                                    Giỏ hàng
-                                </a>
+                                    <a class="step-footer-previous-link" href="/cart">
+                                        <svg class="previous-link-icon icon-chevron icon" xmlns="http://www.w3.org/2000/svg" width="6.7" height="11.3" viewBox="0 0 6.7 11.3"><path d="M6.7 1.1l-1-1.1-4.6 4.6-1.1 1.1 1.1 1 4.6 4.6 1-1-4.6-4.6z"></path></svg>
+                                        Giỏ hàng
+                                    </a>
+
+                                </div>
+                            </form>
 
                         </div>
-                    </div>
 
-            </div>
-            <div class="main-footer">
+                    </div>
 
             </div>
         </div>

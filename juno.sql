@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2020 at 07:10 AM
+-- Generation Time: Sep 20, 2020 at 11:03 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -120,8 +120,18 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `address`, `phone`, `email`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(7, '', '12', '12', NULL, NULL, NULL, NULL),
-(12, 'Khánh', '1', '2', '3', NULL, NULL, NULL);
+(23, '1', '1', '4', 'khanh@gmail.com', NULL, '2020-09-20 08:21:34', NULL),
+(24, '1', '1', '1', 'khanh@gmail.com', NULL, '2020-09-20 08:22:32', NULL),
+(25, '1', '3', '4', 'khanh@gmail.com', NULL, '2020-09-20 08:28:13', NULL),
+(26, 'Lâm Khánh', '23', '011032156', 'khanh@gmail.com', NULL, '2020-09-20 08:35:25', NULL),
+(27, 'Lâm Khánh', '6', '1', 'khanh@gmail.com', NULL, '2020-09-20 08:40:34', NULL),
+(28, 'Lâm Khánh', '3', '1', 'khanhchallenger2086@gmail.com', NULL, '2020-09-20 08:53:13', NULL),
+(29, 'Lâm Khánh', '3', '4', 'khanhchallenger2086@gmail.com', NULL, '2020-09-20 08:54:14', NULL),
+(30, 'Lâm Khánh', '3', '1', 'khanhchallenger2086@gmail.com', NULL, '2020-09-20 08:55:10', NULL),
+(31, 'Lâm Khánh', '3', '4', 'khanhchallenger2086@gmail.com', NULL, '2020-09-20 08:55:48', NULL),
+(32, 'Lâm Khánh', '6', '4', 'khanhchallenger2086@gmail.com', NULL, '2020-09-20 08:56:52', NULL),
+(33, 'Lâm Khánh', '1', '4', 'khanhchallenger2086@gmail.com', NULL, '2020-09-20 08:59:13', NULL),
+(34, 'Lâm Khánh', '3', '4', 'khanhchallenger2086@gmail.com', NULL, '2020-09-20 09:01:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -178,6 +188,21 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `code`, `total_order`, `id_customer`, `payment_method`, `payment_status`, `note_from_customer`, `note_order`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(14, 'DHL083525', 0, 26, '6381', 0, NULL, NULL, NULL, '2020-09-20 08:35:25', NULL),
+(15, 'DHL084034', 0, 27, 'momo\"', 0, NULL, NULL, NULL, '2020-09-20 08:40:34', NULL),
+(16, 'DHL085313', 0, 28, 'napas', 0, NULL, NULL, NULL, '2020-09-20 08:53:13', NULL),
+(17, 'DHL085414', 0, 29, 'napas', 0, NULL, NULL, NULL, '2020-09-20 08:54:14', NULL),
+(18, 'DHL085510', 0, 30, '6381', 0, NULL, NULL, NULL, '2020-09-20 08:55:10', NULL),
+(19, 'DHL085548', 0, 31, 'momo\"', 0, NULL, NULL, NULL, '2020-09-20 08:55:48', NULL),
+(20, 'DHL085652', 0, 32, 'napas', 0, NULL, NULL, NULL, '2020-09-20 08:56:52', NULL),
+(21, 'DHL085913', 0, 33, 'napas', 0, NULL, NULL, NULL, '2020-09-20 08:59:13', NULL),
+(22, 'DHL090139', 0, 34, 'napas', 0, NULL, NULL, NULL, '2020-09-20 09:01:39', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -202,10 +227,25 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `id_order`, `id_product`, `price_product`, `name_product`, `total_price`, `amount`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 3, 2, '20', 'Sản phẩm a', '50000', 20, NULL, NULL, NULL),
-(2, 3, 2, '20', 'Sản phẩm a', '50000', 20, NULL, NULL, NULL),
-(3, 3, 3, '20', 'Sản phẩm b', '50000', 20, NULL, NULL, NULL),
-(4, 3, 3, '20', 'Sản phẩm b', '50000', 20, NULL, NULL, NULL);
+(19, 11, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 1, NULL, '2020-09-20 08:21:34', '2020-09-20 01:21:34'),
+(20, 11, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 1, NULL, '2020-09-20 08:21:34', '2020-09-20 01:21:34'),
+(21, 12, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 1, NULL, '2020-09-20 08:22:32', '2020-09-20 01:22:32'),
+(22, 12, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 1, NULL, '2020-09-20 08:22:32', '2020-09-20 01:22:32'),
+(23, 13, 109, '0', 'Giày xăng đan gót vuông 5cm quai ngang 1', '0', 1, NULL, '2020-09-20 08:28:13', '2020-09-20 01:28:13'),
+(24, 13, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 2, NULL, '2020-09-20 08:28:13', '2020-09-20 01:28:13'),
+(25, 13, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 1, NULL, '2020-09-20 08:28:13', '2020-09-20 01:28:13'),
+(26, 13, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 1, NULL, '2020-09-20 08:28:13', '2020-09-20 01:28:13'),
+(27, 14, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 3, NULL, '2020-09-20 08:35:25', '2020-09-20 01:35:25'),
+(28, 14, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 1, NULL, '2020-09-20 08:35:25', '2020-09-20 01:35:25'),
+(29, 14, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 1, NULL, '2020-09-20 08:35:25', '2020-09-20 01:35:25'),
+(30, 15, 110, '0', 'Giày xăng đan gót vuông 5cm quai ngang 2', '0', 1, NULL, '2020-09-20 08:40:34', '2020-09-20 01:40:34'),
+(31, 16, 109, '0', 'Giày xăng đan gót vuông 5cm quai ngang 1', '0', 1, NULL, '2020-09-20 08:53:13', '2020-09-20 01:53:13'),
+(32, 17, 109, '0', 'Giày xăng đan gót vuông 5cm quai ngang 1', '0', 1, NULL, '2020-09-20 08:54:14', '2020-09-20 01:54:14'),
+(33, 18, 109, '0', 'Giày xăng đan gót vuông 5cm quai ngang 1', '0', 1, NULL, '2020-09-20 08:55:10', '2020-09-20 01:55:10'),
+(34, 19, 110, '0', 'Giày xăng đan gót vuông 5cm quai ngang 2', '0', 1, NULL, '2020-09-20 08:55:48', '2020-09-20 01:55:48'),
+(35, 20, 109, '0', 'Giày xăng đan gót vuông 5cm quai ngang 1', '0', 1, NULL, '2020-09-20 08:56:52', '2020-09-20 01:56:52'),
+(36, 21, 110, '0', 'Giày xăng đan gót vuông 5cm quai ngang 2', '0', 1, NULL, '2020-09-20 08:59:13', '2020-09-20 01:59:13'),
+(37, 22, 111, '0', 'Giày xăng đan gót vuông 5cm quai ngang 3', '0', 1, NULL, '2020-09-20 09:01:39', '2020-09-20 02:01:39');
 
 -- --------------------------------------------------------
 
@@ -655,7 +695,7 @@ ALTER TABLE `colors`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -667,13 +707,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `products`

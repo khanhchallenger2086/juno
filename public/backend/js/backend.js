@@ -52,7 +52,7 @@ $(document).ready(function () {
         $(".variant").css("display", "none");
     });
 
-    $("#info_customer").click(function () {
+    $(".info_customer").click(function () {
         $(".popup").removeClass("d-none");
         info_customer($(this));
     });
@@ -228,6 +228,7 @@ function info_customer($obj) {
     })
         .done((data) => {
             if (data.update == 1) {
+                console.log(data.customer.email);
                 $("#name").val(data.customer.name);
                 $("#phone").val(data.customer.phone);
                 $("#email").val(data.customer.email);

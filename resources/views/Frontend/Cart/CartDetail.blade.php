@@ -29,8 +29,9 @@
 											<tbody class="updateItem">
                                                 <?php
                                                         $tongtien = 0;
+                                                        $cart = session()->has('cart') ? session()->get('cart') : [];
                                                     ?>
-                                                @foreach (session()->get('cart')  as $key => $item_cart)
+                                                @foreach ($cart  as $key => $item_cart)
                                                 <?php
                                                 $tongtien += $item_cart->variant['price'] * $item_cart->buy;
                                                  ?>
@@ -119,7 +120,7 @@
                                 @if (  session()->get('total_buy') > 0 )
                                 <div class="cart-buttons">
 									<a  href="/payment" id="checkout" class="checkLimitCart">Tiến hành đặt hàng</a>
-                                    <a class="link-continue" href="/home" title="Tiếp tục mua hàng">Mua thêm sản phẩm</a>
+                                    <a class="link-continue" href="/" title="Tiếp tục mua hàng">Mua thêm sản phẩm</a>
                                 </div>
                                 @endif
 
