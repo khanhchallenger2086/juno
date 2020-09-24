@@ -174,7 +174,7 @@ $(document).ready(function () {
             });
     });
 
-    $("#role").change(function(){
+    $(".role").change(function(){
         role($(this));
     });
 });
@@ -401,20 +401,20 @@ function update_variant($obj) {
         });
 }
 
-// function role($obj) {
-//     var url = "/admin/role";
-//     var data = {
-//         role: $obj.val(),
-//         id_user: $obj.data('id')
-//     };
-//     $.post(url, data)
-//     .done(function (data) {
-//         alert('Cấp quyền thành công');
-//     })
-//     .fail(function (data) {
-//         console.log("thất bại");
-//     });
-// }
+function role($obj) {
+    var url = "/admin/role";
+    var data = {
+        role: $obj.val(),
+        id_user: $obj.data('id')
+    };
+    $.post(url, data)
+    .done(function (data) {
+        alert('Cấp quyền thành công');
+    })
+    .fail(function (data) {
+        console.log("thất bại");
+    });
+}
 
 function off_box() {
     $(".popup").addClass("d-none");

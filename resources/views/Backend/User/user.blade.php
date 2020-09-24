@@ -31,7 +31,7 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->email }}</td>
                         <td>
-                        <select @if($id_user != 1) @if($item->id_role == $id_role) disabled  @endif @endif data-id="{{$item->id}}" style="width:50%;" class="form-control" name="" id="role">
+                        <select @if($id_user != 1) @if($item->id_role == $id_role) disabled  @endif @endif data-id="{{$item->id}}" style="width:50%;" class="form-control role" name="" id="role">
                                 @foreach ($role as $item_role)
                                     <option @if($id_user != 1) @if($id_role == $item_role->id) disabled  @endif @endif value="{{$item_role->id}}"  {{ $item->id_role == $item_role->id ? "selected" : "" }}>{{$item_role->name}}</option>
                                 @endforeach
