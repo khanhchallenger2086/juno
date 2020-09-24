@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,9 +20,10 @@ class AdminController extends Controller
     public function post_login(Request $Rq) {
         $email = $Rq->email;
         $password = $Rq->password;
-
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            $id = User::where('email',$email)->first()->id;
             session()->put('login',true);
+            session()->put('id_user',$id);
             return redirect()->route('home');
         } else {
             return view('backend.admin.login',['error'=>'Sai mật khẩu hoặc tài khoản']);

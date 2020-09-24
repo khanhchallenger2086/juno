@@ -154,6 +154,13 @@
     </div>
 </div>
 
+<div class="form-group ">
+    <label for="curl" class="control-label col-lg-3">Giá</label>
+    <div class="col-lg-6">
+        <input type="number"  class="form-control" name="price"  value="{{ isset($product) ? $product->material : "" }}" />
+    </div>
+</div>
+
 {{--
 <div class="form-group ">
     <label for="curl" class="control-label col-lg-3">Chất liệu</label>

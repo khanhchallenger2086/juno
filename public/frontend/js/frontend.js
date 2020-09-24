@@ -88,6 +88,7 @@ $(document).ready(function () {
         filter(0,"");
     });
 
+
     $(document).on('click','.more',function(){
         // $page =  $('.more').data('page');
         $page = $('.more').attr('data-page');
@@ -121,7 +122,12 @@ $(document).ready(function () {
             $('.check-mail').removeClass('d-none');
         }
     });
+
+    $(".searchInput").keyup(function() {
+        searchInput($(this));
+    });
 });
+
 
 window.onload = function (){
     $('.more').attr('data-page',1);
@@ -132,7 +138,51 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+function searchInput($obj) {
+    $('.innerResultDesktop div').remove();
+    var url = "/searchInput";
+    var data = {
+        searchInput : $($obj).val()
+    };
+    $.get(url, data)
+        .done(function (data) {
+            console.log(data.product);
+            if (data.product != 0) {
+            data.product.forEach(function($item) {
+                $('.innerResultDesktop').append(`
+                    <div style="padding-top: 10px;" class="item-ult">
+                    <div class="thumbs"><a href="/product-detail/${$item.uri}" title="Giày c gót slingback phối si dập ly">
+                        <img alt="Giày cao gót slingback phối si dập ly" src="/backend/images/juno/${ ($item.image_main).split(';')[0] }">
+                    </a>
+                    </div>
+                    <div class="title">
+                    <a class="/products/gia-y-cao-go-t-slingback-phoi-si-dap-ly" title="Giày cao gót slingback phối si dập ly" href="/product-detail/${$item.uri}">${$item.name}</a>
+                            <p class="f-initial">525,000₫
+                    </p>
+
+                    </div>
+
+                    </div>
+                    `);
+                });
+                $('.innerResultDesktop').append(`
+                    <div style="padding-bottom: 10px;" class="resultsMore">
+                        <a href="/product/tat-ca-san-pham">Xem thêm sản phẩm</a>
+                    </div>
+                `);
+            }
+        })
+        .fail(function (data) {
+            console.log("thất bại");
+        });
+}
+
 function filter($page,$more) {
+    if (parseInt($page) == $('#amount').val() - 1) {
+        $('.more').fadeOut();
+    } else {
+        $('.more').fadeIn();
+    }
     $("#no-product-default").remove();
     let sColor = [], sSize = [], sStyle = [], sMaterial = [];
     var amount = $('#amount').val();
@@ -250,7 +300,7 @@ function filter($page,$more) {
                                             </div>
                                             <div class="actionLoop visible-lg">
                                                 <a class="styleBtnBuy" href="/product-detail/${$item.uri}"><i
-                                                class="icofont-shopping-cart">Mua Ngay</a>
+                                                class="icofont-shopping-cart"></i>Mua Ngay</a>
                                             </div>
                                         </div>
                                     </div>
@@ -276,41 +326,42 @@ function filter($page,$more) {
                                             $('.content-product-list').append(`
                                                     <div class="product-resize col-md-3 col-sm-3 col-xs-6 pro-loop animated zoomIn fixheight">
                                                     <div class="product-block" data-anmation="4">
-                                                        <div class="product-img image-resize fixheight">
-                                                        <a href="/product-detail/${$item.uri}" >
-                                                                <picture>
-                                                                <img class="img-loop lazyload" src="/backend/images/juno/${ ($item.image_main).split(';')[0] }" >
-                                                                </picture>
+                                                            <div class="product-img image-resize fixheight">
+                                                            <a href="/product-detail/${$item.uri}" >
+                                                                    <picture>
+                                                                    <img class="img-loop lazyload" src="/backend/images/juno/${ ($item.image_main).split(';')[0] }" >
+                                                                    </picture>
 
-                                                                <picture>
-                                                                    <img class="img-loop img-hover lazyload" src="/backend/images/juno/${ ($item.image_detail).split(';')[0] }" >
-                                                                </picture>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-detail clearfix">
-                                                            <div class="variantColor variantColor${$item.id}">
-                                                                <ul>
-                                                                </ul>
+                                                                    <picture>
+                                                                        <img class="img-loop img-hover lazyload" src="/backend/images/juno/${ ($item.image_detail).split(';')[0] }" >
+                                                                    </picture>
+                                                                </a>
                                                             </div>
-                                                            <div class="box-pro-detail">
-                                                                <h3 class="pro-name">
-                                                                    <a href="/product-detail/${$item.uri}" title="Giày xăng đan quai ngang bản to SD01057">
-                                                                        ${$item.name}
-                                                                    </a>
-                                                                </h3>
-                                                                <div class="box-pro-prices">
-                                                                    <p class="pro-price highlight">
-                                                                        ${$item.list_variant[0].price}đ
-                                                                    </p>
+                                                            <div class="product-detail clearfix">
+                                                                <div class="variantColor variantColor${$item.id}">
+                                                                    <ul>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="box-pro-detail">
+                                                                    <h3 class="pro-name">
+                                                                        <a href="/product-detail/${$item.uri}" title="Giày xăng đan quai ngang bản to SD01057">
+                                                                            ${$item.name}
+                                                                        </a>
+                                                                    </h3>
+                                                                    <div class="box-pro-prices">
+                                                                        <p class="pro-price highlight">
+                                                                            ${$item.list_variant[0].price}đ
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="activeLabelStatus">
-                                                            <div class="trendingNew">Chỉ bán online</div>
-                                                        </div>
-                                                        <div class="actionLoop visible-lg">
-                                                            <a class="styleBtnBuy" href="/product-detail/${$item.uri}"><i class="icofont-shopping-cart"> </i> Mua Ngay</a>
-                                                        </div>
+                                                            <div class="activeLabelStatus">
+                                                                <div class="trendingNew">Chỉ bán online</div>
+                                                            </div>
+
+                                                            <div class="actionLoop visible-lg">
+                                                                <a class="styleBtnBuy" href="/product-detail/${$item.uri}"><i class="icofont-shopping-cart"> </i> Mua Ngay</a>
+                                                            </div>
                                                     </div>
                                                 </div>
                                             `);

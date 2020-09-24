@@ -15,6 +15,7 @@ class ProductController extends Controller
 {
     public function product($uri)
     {
+        $setting = DB::table('setting')->first();
         $category_parent = (new Category)->CategoryParent();
         $all = (new product)->ProductOfCat_8Item();
         if ($uri == 'tat-ca-san-pham' || $uri == 'new-product') {
@@ -73,13 +74,15 @@ class ProductController extends Controller
             'color' => $color ?? [],
             'id_category' => $id,
             'amount' => ceil($amount),
-            'uri' => $uri
+            'uri' => $uri,
+            'setting' => $setting
         ]);
     }
 
 
     public function product_detail($uri)
     {
+        $setting = DB::table('setting')->first();
         $category_parent = (new Category)->CategoryParent(); // lặp danh mục menu
         $all = (new product)->ProductOfCat_8Item(); // lặp danh mục có sản phẩm
         $OneProduct = Product::where('uri', $uri)->first();
@@ -88,7 +91,8 @@ class ProductController extends Controller
         return view('Frontend.Product.product-detail', [
             'category_parent' => $category_parent,
             'all' => $all,
-            'list' => json_decode($OneProduct)
+            'list' => json_decode($OneProduct),
+            'setting' => $setting
         ]);
     }
 }

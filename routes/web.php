@@ -35,8 +35,21 @@ Route::post('/delete-cart-ajax', 'Frontend\AjaxController@delete_cart_ajax');
 Route::post('/update-cart', 'Frontend\AjaxController@update_cart')->name('ajax.update-cart');
 Route::post('/send-mail', 'Frontend\AjaxController@send_mail');
 
+// contact
+Route::get('/contact', 'Frontend\ContactController@contact');
+Route::post('/post-contact', 'Frontend\ContactController@post_contact');
+
+// search
+Route::get('/searchInput', 'Frontend\HomeController@searchInput');
 
 Route::prefix('admin')->group(function () {
+    // Role
+    Route::get('/user','Backend\UserController@index');
+    Route::post('/role','Backend\UserController@role');
+    Route::get('/delete-user-{id}','Backend\UserController@delete_role')->name('role.delete');
+    Route::get('/user-create','Backend\UserController@user_create')->name('user.create');
+    Route::post('/user-save','Backend\UserController@user_save')->name('user.save');
+
     // Backend
     Route::get('/','Backend\AdminController@home')->name('home');
 
@@ -52,6 +65,10 @@ Route::prefix('admin')->group(function () {
     Route::get('product/{id}/delete', 'Backend\productController@delete')->name('product.delete'); // xóa mềm
     Route::resource('product', 'Backend\ProductController')->except('destroy', 'show');
 
+    //contact
+    Route::get('/contact', 'Backend\ContactController@index');
+    Route::get('/contact/{id}/delete', 'Backend\ContactController@contact_delete')->name('contact.delete');
+
     // category
     Route::get('category/restore_trash', 'Backend\CategoryController@restore_trash')->name('category.restore_trash');
     Route::get('category/{id}/destroy_trash', 'Backend\CategoryController@destroy_trash')->name('category.destroy_trash'); // xóa cứng
@@ -65,6 +82,7 @@ Route::prefix('admin')->group(function () {
     Route::get('order/restore_trash', 'Backend\OrderController@restore_trash')->name('order.restore_trash');
     Route::get('order/{id}/destroy_trash', 'Backend\OrderController@destroy_trash')->name('order.destroy_trash'); // xóa cứng
     Route::get('order/trash', 'Backend\OrderController@trash')->name('order.trash');
+    Route::get('order/{id}/complete', 'Backend\OrderController@order_complete')->name('order.complete');
     Route::get('order/{id}/delete', 'Backend\OrderController@delete')->name('order.delete'); // xóa mềm
     Route::resource('order', 'Backend\OrderController')->except('destroy', 'show', 'create', 'store', 'edit', 'update');
 

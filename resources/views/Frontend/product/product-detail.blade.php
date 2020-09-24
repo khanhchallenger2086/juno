@@ -6,7 +6,7 @@
         <div class="padding-lf-40 clearfix">
             <div class=" ">
                 <ol class="breadcrumb breadcrumb-arrows clearfix">
-                    <li><a href="/home" target="_self"><i class="fa fa-home"></i> Trang chủ</a></li>
+                    <li><a href="/home" target="_self"><i class="icofont-home"></i> Trang chủ</a></li>
                 <li class="active"><span> {{$list->name}}</span></li>
                 </ol>
             </div>

@@ -61,25 +61,25 @@
                             <div class="layered_subtitle dropdown-filter">
                                 <span>Màu sắc</span>
                                 <span class="icon-control">
-                                    <i class="fa fa-sort-down"></i>
+                                    <i style="color: black" class="icofont-rounded-down"></i>
                                 </span>
                             </div>
                             <div class="layered_subtitle dropdown-filter eachTagFilter" style="display: block;">
                                 <span>Kích cỡ</span>
                                 <span class="icon-control">
-                                    <i class="fa fa-sort-down"></i>
+                                    <i style="color: black" class="icofont-rounded-down"></i>
                                 </span>
                             </div>
                             <div class="layered_subtitle dropdown-filter eachTagFilter" style="display: block;">
                                 <span>Kiểu dáng</span>
                                 <span class="icon-control">
-                                    <i class="fa fa-sort-down"></i>
+                                    <i style="color: black" class="icofont-rounded-down"></i>
                                 </span>
                             </div>
                             <div class="layered_subtitle dropdown-filter eachTagFilter" style="display: block;">
                                 <span>Chất liệu</span>
                                 <span class="icon-control">
-                                    <i class="fa fa-sort-down"></i>
+                                    <i style="color: black" class="icofont-rounded-down"></i>
                                 </span>
                             </div>
                         </div>
@@ -220,8 +220,8 @@
 
         ?>
         @if ($list->toArray() != [])
-        <div class="text-center">
-            <a class="btn btn-primary more" data-page=""  >Xem thêm</a>
+        <div class="text-center mt-4">
+            <a class="btn btn-default more" data-page=""  >Xem thêm</a>
         </div>
         @endif
         <input type="hidden" value="{{$uri}}" id="sale" >

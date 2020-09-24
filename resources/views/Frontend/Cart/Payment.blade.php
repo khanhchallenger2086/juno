@@ -90,7 +90,7 @@
                                         <td class="total-line-name">Tạm tính</td>
                                         <td class="total-line-price">
                                             <span class="order-summary-emphasis" data-checkout-subtotal-price-target="45500000">
-                                                {{ isset($tongtien) ? number_format($tongtien) . "đ": "0đ" }}
+                                                {{ isset($tonggia) ? number_format($tonggia) . "đ": "0đ" }}
                                             </span>
                                         </td>
                                     </tr>
@@ -115,7 +115,7 @@
                                         <td class="total-line-name payment-due">
                                             <span class="payment-due-currency">VND</span>
                                             <span class="payment-due-price" data-checkout-payment-due-target="45500000">
-                                                {{ isset($tongtien) ? number_format($tongtien) . "đ": "0đ" }}
+                                                {{ isset($tonggia) ? number_format($tonggia) . "đ": "0đ" }}
                                             </span>
                                         </td>
                                     </tr>

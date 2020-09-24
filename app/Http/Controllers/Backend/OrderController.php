@@ -39,6 +39,12 @@ class OrderController extends Controller
         }
     }
 
+    public function order_complete($id) {
+        $order = Order::find($id);
+        $order->payment_status = 1;
+        $order->save();
+        return redirect()->route('order.index');
+    }
 
     public function delete($id)
     {

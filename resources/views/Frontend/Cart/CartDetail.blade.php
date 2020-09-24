@@ -66,11 +66,12 @@
                                                             <button type="button" data-id="{{$key}}" class="qtyplus qty-btn ">+</button>
                                                             </div>
                                                         </td>
-                                                        <td>
-                                                            <p>Giá: {{ number_format($item_cart->variant['price']) . '₫' }}</p>
+                                                        <td style="padding-right:10px">
+                                                            <div>Giá: {{ number_format($item_cart->variant['price']) . '₫' }}</div>
                                                         </td>
                                                         <td class="hidden-xs totalLinePriceVariantCart">
                                                         <p class="price{{$key}}">
+
                                                             <span class="line-item-total">{{ number_format($item_cart->variant['price'] * $item_cart->buy) }}₫</span>
                                                             </p>
                                                         </td>

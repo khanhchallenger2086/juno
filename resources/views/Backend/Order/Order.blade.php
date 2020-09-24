@@ -45,9 +45,8 @@
                     <tr>
                         <th> Mã đơn hàng</th>
                         <th> Tổng đơn hàng</th>
-                        <th> Phương thức thanh toán</th>
-                        <th> Trạng thái đơn hàng</th>
-                        <th> Ghi chú</th>
+                        <th> PT thanh toán</th>
+                        <th> Trạng thái</th>
                         <th> Tùy chỉnh</th>
                     </tr>
                 </thead>
@@ -58,10 +57,10 @@
                         <td>{{ number_format($item->total_order) . ' VND' }}</td>
                         <td>{{ $item->payment_method }}</td>
                         <td>{{ $item->payment_status == 1 ? "Đã thanh toán" : "Chưa thanh toán" }}</td>
-                        <td>{{ $item->note_from_customer }}</td>
                         <td>
                             <a class="btn btn-primary info_customer" href="#"  data-id="{{ $item->id_customer }}">Thông tin KH</a>
                             <a class="btn btn-primary openvariant" href="#" data-id="{{$item->id}}">Chi tiết</a>
+                            <a class="btn btn-success" href="{{route('order.complete',$item->id)}}" data-id="{{$item->id}}">Hoàn Tất</a>
                             <a class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa đơn hàng này không ?')"
                                 href="{{ Route('order.delete',$item->id) }}">Xóa</a>
                         </td>

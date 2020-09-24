@@ -11,15 +11,18 @@ use App\Model\Product;
 use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
     public function cart_detail() {
+        $setting = DB::table('setting')->first();
         $category_parent = (new Category)->CategoryParent();
         $all = (new Product)->ProductOfCat_8Item();
         return view('Frontend.Cart.CartDetail',[
             'category_parent' => $category_parent,
             'all' => $all,
+            'setting' => $setting
         ]);
     }
 
@@ -33,6 +36,7 @@ class CartController extends Controller
     }
 
     public function complete_payment(Request $rq) {
+        $setting = DB::table('setting')->first();
         $category_parent = Category::where('parent', 0)->where('deleted_at', null)->limit(3)->get();
         $all = (new Product)->ProductOfCat_8Item();
 
@@ -75,8 +79,9 @@ class CartController extends Controller
             $id_order =  $order->id;
             $code_order =  $order->code;
 
+            $ar = [];
             foreach ($cart as $key => $item_cart) {
-                Order_detail::create([
+                $order_detail = Order_detail::create([
                     'id_order' => $id_order,
                     'id_product' => $item_cart->id,
                     'name_product' => $item_cart->name,
@@ -86,6 +91,7 @@ class CartController extends Controller
                     'created_at' => date("Y-m-d H:i:s", strtotime('+7 hours')),
                     'updated_at' => null
                 ]);
+                    $ar[] =  $order_detail;
             }
 
             session()->forget('cart');
@@ -93,7 +99,12 @@ class CartController extends Controller
 
             $data = [
                 'code_order' => $code_order,
+                'payment_method' => $order->payment_method,
+                'payment_status' => $order->payment_status,
+                'total_order' => $order->total_order,
+                'product' => $ar,
             ];
+
             Mail::send('EmailCart', $data, function ($message) use($rq) {
                 $message->sender('khanhchallenger2086@gmail.com', 'Lâm khánh');
                 $message->to($rq->email, $rq->name);
@@ -103,7 +114,8 @@ class CartController extends Controller
             return view('Frontend.Cart.CompleteCart',[
                 'category_parent' => $category_parent,
                 'all' => $all,
-                'code' => $code_order
+                'code' => $code_order,
+                'setting' => $setting
             ]);
 
         } else {

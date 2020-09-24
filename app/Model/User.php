@@ -10,5 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
     protected $table = 'user';
+    // protected $fillable = ['name', 'email', 'password',];
 
+    // public function getAuthPassword()
+    // {
+    //     return $this->passwordd;
+    // }
 }

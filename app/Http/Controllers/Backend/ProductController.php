@@ -124,7 +124,8 @@ class ProductController extends Controller
                         $ar[] = [
                             'color' => $v_color,
                             'image' => DB::table('colors')->where('name',$v_color)->first()->image,
-                            'size' => $v_size
+                            'size' => $v_size,
+                            'price' => $request->price != "" ? $request->price : 0
                         ];
                     }
                 }
@@ -136,6 +137,7 @@ class ProductController extends Controller
                 'color' => $item['color'],
                 'size' => $item['size'],
                 'image' => $item['image'],
+                'price' => $item['price'],
                 "id_product" => $id,
                 "created_at" => date("Y-m-d H:i:s")
             ]);

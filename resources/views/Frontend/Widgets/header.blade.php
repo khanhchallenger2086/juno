@@ -30,7 +30,7 @@
 <div class="outerHeightHeader">
     <!-- header -->
     <header id="site-header" class="main-header clearfix affix-mobile">
-        <div class="no-padding hidden-xs col-sm-12 col-md-2">
+        <div class="no-padding col-sm-12 col-md-2">
             <div class="header-mid wrap-flex-align">
                 <div class="wrap-logo" itemscope itemtype="http://schema.org/Organization">
                     <a href="/home" itemprop="url">
@@ -95,8 +95,8 @@
                   </div> -->
             </div>
         </div>
-        <div class="no-padding col-xs-12 hidden-sm hidden-xs col-md-8">
-            <div class="menu-desktop hidden-sm hidden-xs">
+        <div class="no-padding col-xs-12  col-md-8">
+            <div class="menu-desktop ">
                 <div class="wrap-logo wrap-logp-mb">
                     <a href="/home">
                     {{-- <img height="23" src="{{ asset('/frontend/images/logo.svg') }}" alt="JUNO" class="img-responsive logoimg" /> --}}
@@ -111,6 +111,7 @@
                                     Hàng Mới Về
                                 </a>
                             </li>
+
                             @foreach ($category_parent as $item_parent)
                             <?php
                     $category_son = DB::table('categories')->where('parent',$item_parent->id)->where('deleted_at',null)->get();
@@ -161,6 +162,12 @@
                         Sale Đón Thu
                     </a>
                 </li>
+                <li class=" ">
+                    <a  href="/contact"
+                        title="Liên hệ">
+                        Liên Hệ
+                    </a>
+                </li>
                 </ul>
                 </nav>
             </div>
@@ -173,10 +180,17 @@
             <input type="text" name="q" class="searchInput" placeholder="Bạn cần tìm gì..." value />
             <i class="icofont-search btnSearch"></i>
         </form>
-        <div id="resultSearchDesktop" class="resultDesktop">
-            <div class="innerResultDesktop"></div>
-        </div>
+
+            <div id="resultSearchDesktop" class="resultDesktop" style="display: block;">
+                <div class="innerResultDesktop">
+                    <div class="resultsMore d-none">
+                        <a href="">Xem thêm sản phẩm</a>
+                    </div>
+                </div>
+            </div>
+
     </div>
 </div>
 </header>
+
 </div>

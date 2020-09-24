@@ -79,22 +79,22 @@
           <h4>LIKE JUNO TRÊN MẠNG XÃ HỘI</h4>
           <ul class="navbar-social">
             <li class="social list-icon">
-              <a href="//www.facebook.com/giayjuno" target="_blank" rel="nofollow">
+                <a href="{{$setting->link_fb}}" target="_blank" rel="nofollow">
                 <i class="icofont-facebook"></i>
               </a>
             </li>
             <li class="list-icon">
-              <a href="//www.instagram.com/juno.vn/" target="_blank" rel="nofollow">
+              <a href="{{$setting->link_instagram}}" target="_blank" rel="nofollow">
                 <i class="icofont-instagram"></i>
               </a>
             </li>
             <li class="list-icon">
-              <a href="//www.youtube.com/user/JunoShoesVn" target="_blank" rel="nofollow">
+              <a href="{{$setting->link_youtube}}" target="_blank" rel="nofollow">
                 <i class="icofont-brand-youtube"></i>
               </a>
             </li>
             <li>
-              <a href="http://zalo.me/giayjuno" target="_blank" rel="nofollow">
+              <a href="{{$setting->link_zalo}}" target="_blank" rel="nofollow">
                 <i class="fa-zalo"></i>
               </a>
             </li>
@@ -138,31 +138,31 @@
         <div class="col-xs-12 col-sm-3">
           <h4>HỖ TRỢ KHÁCH HÀNG</h4>
           <ul>
-            <li><a href="/pages/huong-dan-chon-size-giay">Hướng dẫn chọn cỡ giày</a></li>
-            <li><a href="/pages/chinh-sach-doi-tra-va-hoan-tien">Chính sách đổi trả</a></li>
-            <li><a href="/pages/thanh-toan-giao-nhan">Thanh toán giao nhận</a></li>
-            <li><a href="/pages/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
-            <li><a href="/pages/cau-hoi-thuong-gap">Câu hỏi thường gặp</a></li>
-            <li><a href="/pages/khachhangthanthiet">Chính sách khách hàng thân thiết</a></li>
-            <li><a href="/pages/huong-dan-mua-hang-online">Hướng dẫn mua hàng Online</a></li>
+            <li><a href="#">Hướng dẫn chọn cỡ giày</a></li>
+            <li><a href="#">Chính sách đổi trả</a></li>
+            <li><a href="#">Thanh toán giao nhận</a></li>
+            <li><a href="#">Chính sách bảo mật</a></li>
+            <li><a href="#">Câu hỏi thường gặp</a></li>
+            <li><a href="#">Chính sách khách hàng thân thiết</a></li>
+            <li><a href="#">Hướng dẫn mua hàng Online</a></li>
           </ul>
         </div>
         <div class="col-xs-12 col-sm-3">
           <h4>VỀ JUNO</h4>
           <ul>
-            <li><a href="/pages/gioi-thieu">Giới thiệu</a></li>
-            <li><a href="/pages/lien-he">Liên hệ</a></li>
-            <li><a href="http://careers.juno.vn/">Tuyển dụng</a></li>
-            <li><a href="/blogs/tin-tuc-juno">Tin tức Juno</a></li>
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Liên hệ</a></li>
+            <li><a href="#">Tuyển dụng</a></li>
+            <li><a href="#">Tin tức Juno</a></li>
           </ul>
         </div>
         <div class="col-xs-12 col-sm-3">
           <h4>HỆ THỐNG SHOWROOM</h4>
           <ul>
-            <a href="/blogs/he-thong-cua-hang">
+            <a href="#">
               <img src="{{asset('frontend/images/pagestore_722cac9a1ac84f82b59da93a2fbbc556.png')}}" alt="Store" />
             </a>
-            <a href="/blogs/he-thong-cua-hang">Tìm địa chỉ SHOWROOM gần bạn<i class="fa fa-caret-right"></i></a>
+            <a href="#">Tìm địa chỉ SHOWROOM gần bạn<i class="fa fa-caret-right"></i></a>
           </ul>
         </div>
         <div class="col-xs-12 col-sm-3">
@@ -182,22 +182,7 @@
               fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=&amp;container_width=158&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fgiayjuno&amp;locale=vi_VN&amp;sdk=joey&amp;show_facepile=false&amp;small_header=false&amp;tabs=&amp;width="
             >
               <span style="vertical-align: bottom; width: 180px; height: 130px">
-                {{-- <iframe
-                  name="f56f6bebe076d8"
-                  width="1000px"
-                  height="1000px"
-                  data-testid="fb:page Facebook Social Plugin"
-                  title="fb:page Facebook Social Plugin"
-                  frameborder="0"
-                  allowtransparency="true"
-                  allowfullscreen="true"
-                  scrolling="no"
-                  allow="encrypted-media"
-                  src="unsupportedbrowser.html"
-                  style="border: none; visibility: visible; width: 180px; height: 130px"
-                  class
-                >
-                </iframe >--}}
+                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FATSM2086%2F&tabs=timeline&width=250&height=100&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="250" height="100" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
               </span>
             </div>
           </ul>

@@ -2,6 +2,7 @@
 
 <head>
     <title>Visitors an Admin Panel Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+    <meta name="CSRF-TOKEN" content="{{csrf_token()}}">
     @include('backend.widgets.head')
 </head>
 

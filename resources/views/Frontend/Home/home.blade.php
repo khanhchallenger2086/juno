@@ -2,6 +2,13 @@
 
 
 @section('content')
+<div id="carouselExampleSlidesOnly" style="z-index: -1" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="{{asset('/backend/images/juno/banner.jpg')}}" alt="First slide">
+      </div>
+    </div>
+  </div>
 <!-- phần lặp sản phẩm -->
 <section id="sectionHomeTabCollection1" class="clearfix section section-collection">
     <div class="container-fluid">

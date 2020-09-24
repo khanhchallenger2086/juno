@@ -13,7 +13,7 @@ class UserTable extends Seeder
     public function run()
     {
         $data = [
-            'email' => 'khanh@gmail.com',
+            'email' => 'khanh3@gmail.com',
             'password' => bcrypt('123456'),
             'created_at' => new DateTime(),
         ];
